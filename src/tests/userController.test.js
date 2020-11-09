@@ -2,7 +2,7 @@ jest.mock('../services/userService');
 
 const { mockRequest, mockResponse } = require('../utils/interceptor');
 const controller = require('../controllers/userController');
-const { getAllUsers } = require('../services/UserService');
+const { getAllUsers, getUserById } = require('../services/UserService');
 
 const userArray = [
     {
@@ -61,6 +61,32 @@ describe("Check the GetAllUsers method in the UserController", () => {
             "count": 2,
             "data": userArray,
             "success": true
+        });
+    });
+});
+
+describe("Check the getUserById method in the UserController", () => {
+
+    /*
+    * Test the getUserById method whenever the
+    * user exists in the database.
+    * @author Ruben Fricke
+    */
+    test('Get the user whenever the user exists', () => {
+        let req = mockRequest();
+        req.params.id = 1;
+        let res = mockResponse();
+        let returnedUser = userArray.filter(user => user.id == req.params.id);
+
+        getUserById.mockReturnValueOnce(returnedUser);
+
+        controller.getUserById(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(getUserById).toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            "success": true,
+            "data": returnedUser
         });
     });
 });
