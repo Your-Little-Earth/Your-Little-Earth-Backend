@@ -1,57 +1,79 @@
-const postsArray = [
-    {
-      id: 1,
-      title: 'React from scratch',
-      content: 'In this article we will create a ToDo App in React from scratch.... etc.etc.etc.',
-      author: 'Jakob Klamser'
-    },
-    {
-      id: 2,
-      title: 'Vanilla JavaScript Basics',
-      content: 'Today we will discuss some basic JavaScript fundamentals like array manipulation, currying etc.',
-      author: 'Jakob Klamser'
-    },
-    {
-      id: 3,
-      title: 'VS Code Extensions',
-      content: 'I wanted to show you some of my favorite VS Code Extensions.... Bracket Pair Colorizer etc.etc.',
-      author: 'Jakob Klamser'
-    },
-    {
-      id: 4,
-      title: 'ExpressJS REST API',
-      content: 'Is this the current article?',
-      author: 'Jakob Klamser'
-    },
-  ];
+const userService = require('../services/UserService')
 
+/*
+* Retrieve all the users stored in the database.
+* @author Ruben Fricke
+* @route GET api/users
+* @access Public
+*/
+exports.getAllUsers = (req, res) => {
+  const users = userService.getAllUsers();
+  return res.status(200).json({
+    success: true,
+    count: users.length,
+    data: users,
+  });
+};
 
-  // @route   GET api/posts
-  // @desc    Get All Posts
-  // @access  Public
-  exports.getPosts = (req, res) => {
-    const posts = postsArray;
+/*
+* Retrieve a specific user stored in the database.
+* @author Ruben Fricke
+* @route GET api/users/{id}
+* @access Public
+*/
+exports.getUserById = (req, res) => {
+  const user = userService.getUserById(Number(req.params.id));
+  if (user !== undefined) {
     return res.status(200).json({
       success: true,
-      count: posts.length,
-      data: posts,
+      data: user
     });
-  };
+  }
 
-  // @route   GET api/posts/:id
-  // @desc    Gets a post by ID
-  // @access  Private
-  exports.getPostById = (req, res) => {
-    const post = postsArray.filter(post => post.id === Number(req.params.id));
-    console.log(post);
-    if (post[0] !== undefined) {
-      return res.status(200).json({
-        success: true,
-        data: post[0],
-      });
-    }
+  return res.status(404).json({
+    success: false,
+    error: 'No user found',
+  })
+};
+
+/*
+* Creates a new user to store in the database.
+* @author Ruben Fricke
+* @route POST api/users
+* @access Public
+*/
+exports.createUser = (req, res) => {
+    userService.createUser();
     return res.status(404).json({
-      success: false,
-      error: 'No post found',
-    })
-  };
+        success: false,
+        error: 'No user found',
+    });
+};
+
+/*
+* Updates an existing user.
+* @author Ruben Fricke
+* @route PUT api/users/{id}
+* @access Public
+*/
+exports.updateUser = (req, res) => {
+    userService.updateUser();
+    return res.status(404).json({
+        success: false,
+        error: 'No user found',
+    });
+};
+
+/*
+* Deletes an existing user.
+* @author Ruben Fricke
+* @route DELETE api/users/{id}
+* @access Public
+*/
+exports.deleteUser = (req, res) => {
+    userService.deleteUser();
+    return res.status(404).json({
+        success: false,
+        error: 'No user found',
+    });
+};

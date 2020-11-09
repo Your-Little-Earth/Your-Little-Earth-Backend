@@ -1,15 +1,26 @@
-
 const express = require('express');
-
 const router = express.Router();
 
 // Controller Methods
-const { getPosts, getPostById } = require('../controllers/userController');
+const { getAllUsers, getUserById, createUser, deleteUser, updateUser } = require('../controllers/userController');
 
+/*
+* Routes for user endpoints without any route parameter
+* @author Ruben Fricke
+*/
 router.route('/')
-  .get(getPosts);
+  .get(getAllUsers)
+  .post(createUser);
 
+/*
+* Routes for user endpoints with id route parameter to
+* for specifying a specific user.
+* @author Ruben Fricke
+* @param {id} id is the paramaeter for specifying a specific user.
+*/
 router.route('/:id')
-  .get(getPostById);
+  .get(getUserById)
+  .delete(deleteUser)
+  .put(updateUser);
 
 module.exports = router;
