@@ -89,4 +89,27 @@ describe("Check the getUserById method in the UserController", () => {
             "data": returnedUser
         });
     });
+
+    /*
+    * Test the getUserById method whenever the
+    * specified id is invalid.
+    * @author Ruben Fricke
+    */
+    test('Get the user whenever the id is invalid', () => {
+        let req = mockRequest();
+        req.params.id = -91;
+        let res = mockResponse();
+        let returnedUser = userArray.filter(user => user.id == req.params.id);
+
+        getUserById.mockReturnValueOnce(returnedUser);
+
+        controller.getUserById(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(getUserById).toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            "success": false,
+            "error": 'The specified id is invalid.'
+        });
+    });
 });
