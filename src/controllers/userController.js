@@ -29,7 +29,7 @@ const postsArray = [
   // @route   GET api/posts
   // @desc    Get All Posts
   // @access  Public
-  exports.getPosts = (req, res) => {
+  exports.getAllUsers = (req, res) => {
     const posts = postsArray;
     return res.status(200).json({
       success: true,
@@ -41,7 +41,7 @@ const postsArray = [
   // @route   GET api/posts/:id
   // @desc    Gets a post by ID
   // @access  Private
-  exports.getPostById = (req, res) => {
+  exports.getUserById = (req, res) => {
     const post = postsArray.filter(post => post.id === Number(req.params.id));
     console.log(post);
     if (post[0] !== undefined) {

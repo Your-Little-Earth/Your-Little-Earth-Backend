@@ -4,12 +4,12 @@ const express = require('express');
 const router = express.Router();
 
 // Controller Methods
-const { getPosts, getPostById } = require('../controllers/userController');
+const { getAllUsers, getUserById } = require('../controllers/userController');
 
 router.route('/')
-  .get(getPosts);
+  .get(getAllUsers);
 
 router.route('/:id')
-  .get(getPostById);
+  .get(getUserById);
 
 module.exports = router;
