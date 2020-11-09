@@ -22,13 +22,21 @@ exports.getAllUsers = (req, res) => {
 * @access Public
 */
 exports.getUserById = (req, res) => {
-  const user = userService.getUserById(Number(req.params.id));
-  if (user !== undefined) {
-    return res.status(200).json({
-      success: true,
-      data: user
-    });
-  }
+    let userId = Number(req.params.id);
+    if(userId <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        })
+    }
+
+    const user = userService.getUserById(userId);
+    if (user !== undefined) {
+        return res.status(200).json({
+            success: true,
+            data: user
+        });
+    }
 
   return res.status(404).json({
     success: false,
