@@ -4,18 +4,25 @@ const { mockRequest, mockResponse } = require('../utils/interceptor');
 const controller = require('../controllers/userController');
 const { getAllUsers } = require('../services/UserService');
 
-test('Getting all user whenever there are no users', () => {
-    let req = mockRequest();
-    let res = mockResponse();
+describe("Check the GetAllUsers method in the UserController", () => {
 
-    getAllUsers.mockReturnValueOnce([]);
+    /*
+    * Test the GetAllUsers method whenever there are no users
+    * @author Ruben Fricke
+    */
+    test('Getting all user whenever there are no users', () => {
+        let req = mockRequest();
+        let res = mockResponse();
 
-    controller.getAllUsers(req, res);
+        getAllUsers.mockReturnValueOnce([]);
 
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({
-        "count": 0,
-        "data": [],
-        "success": true});
-    expect(getAllUsers).toHaveBeenCalled();
-})
+        controller.getAllUsers(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith({
+            "count": 0,
+            "data": [],
+            "success": true});
+        expect(getAllUsers).toHaveBeenCalled();
+    });
+});
