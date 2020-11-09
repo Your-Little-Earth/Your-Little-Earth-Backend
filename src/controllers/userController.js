@@ -7,11 +7,11 @@ const userService = require('../services/UserService')
 * @access Public
 */
 exports.getAllUsers = (req, res) => {
-  const posts = userService.getAllUsers();
+  const users = userService.getAllUsers();
   return res.status(200).json({
     success: true,
-    count: posts.length,
-    data: posts,
+    count: users.length,
+    data: users,
   });
 };
 
@@ -22,11 +22,11 @@ exports.getAllUsers = (req, res) => {
 * @access Public
 */
 exports.getUserById = (req, res) => {
-  const user = userService.getAllUsers().filter(post => post.id === Number(req.params.id));
+  const user = userService.getUserById(Number(req.params.id));
   if (user !== undefined) {
     return res.status(200).json({
       success: true,
-      data: post[0],
+      data: user
     });
   }
 
