@@ -22,9 +22,8 @@ exports.getAllUsers = (req, res) => {
 * @access Public
 */
 exports.getUserById = (req, res) => {
-  const post = userService.getAllUsers().filter(post => post.id === Number(req.params.id));
-  console.log(post);
-  if (post[0] !== undefined) {
+  const user = userService.getAllUsers().filter(post => post.id === Number(req.params.id));
+  if (user !== undefined) {
     return res.status(200).json({
       success: true,
       data: post[0],
@@ -33,7 +32,7 @@ exports.getUserById = (req, res) => {
 
   return res.status(404).json({
     success: false,
-    error: 'No post found',
+    error: 'No user found',
   })
 };
 
@@ -44,9 +43,10 @@ exports.getUserById = (req, res) => {
 * @access Public
 */
 exports.createUser = (req, res) => {
-  return res.status(404).json({
-      success: false,
-      error: 'No user found',
+    userService.createUser();
+    return res.status(404).json({
+        success: false,
+        error: 'No user found',
     });
 };
 
@@ -57,9 +57,10 @@ exports.createUser = (req, res) => {
 * @access Public
 */
 exports.updateUser = (req, res) => {
-   return res.status(404).json({
-      success: false,
-      error: 'No user found',
+    userService.updateUser();
+    return res.status(404).json({
+        success: false,
+        error: 'No user found',
     });
 };
 
@@ -70,6 +71,7 @@ exports.updateUser = (req, res) => {
 * @access Public
 */
 exports.deleteUser = (req, res) => {
+    userService.deleteUser();
     return res.status(404).json({
         success: false,
         error: 'No user found',
