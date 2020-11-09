@@ -30,8 +30,8 @@ exports.getUserById = (req, res) => {
         })
     }
 
-    const user = userService.getUserById(userId);
-    if (user !== undefined) {
+    let user = userService.getUserById(userId);
+    if (user[0] !== (undefined || null)) {
         return res.status(200).json({
             success: true,
             data: user
