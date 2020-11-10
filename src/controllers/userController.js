@@ -27,7 +27,7 @@ exports.getUserById = (req, res) => {
         return res.status(400).json({
             success: false,
             error: 'The specified id is invalid.',
-        })
+        });
     }
 
     let user = userService.getUserById(userId);
@@ -72,6 +72,13 @@ exports.createUser = (req, res) => {
 * @access Public
 */
 exports.updateUser = (req, res) => {
+    let userId = Number(req.params.id);
+    if(userId <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        });
+    }
     userService.updateUser();
     return res.status(404).json({
         success: false,

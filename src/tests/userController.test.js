@@ -2,7 +2,7 @@ jest.mock('../services/userService');
 
 const { mockRequest, mockResponse } = require('../utils/interceptor');
 const controller = require('../controllers/userController');
-const { getAllUsers, getUserById, createUser } = require('../services/UserService');
+const { getAllUsers, getUserById, createUser, updateUser } = require('../services/UserService');
 
 const userArray = [
     {
@@ -183,6 +183,29 @@ describe("Check the createUser method in the UserController", () => {
         expect(res.json).toHaveBeenCalledWith({
             'success': true,
             'data': returnObject
+        });
+    });
+});
+
+describe("Check the updateUser method in the UserController", () => {
+
+    /*
+    * Test the updateUser method whenever there is
+    * no valid id specified in the body.
+    * @author Ruben Fricke
+    */
+    test('Update the user whenever the id is invalid.', () => {
+        let req = mockRequest();
+        req.params.id = Number.MIN_SAFE_INTEGER;
+        let res = mockResponse();
+
+        controller.updateUser(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(updateUser).not.toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            'success': false,
+            'error': 'The specified id is invalid.'
         });
     });
 });
