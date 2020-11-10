@@ -2,7 +2,7 @@ jest.mock('../services/userService');
 
 const { mockRequest, mockResponse } = require('../utils/interceptor');
 const controller = require('../controllers/userController');
-const { getAllUsers, getUserById } = require('../services/UserService');
+const { getAllUsers, getUserById, createUser } = require('../services/UserService');
 
 const userArray = [
     {
@@ -132,7 +132,57 @@ describe("Check the getUserById method in the UserController", () => {
         expect(getUserById).toHaveBeenCalled();
         expect(res.json).toHaveBeenCalledWith({
             "success": false,
-            "error": 'The specified id is invalid.'
+            "error": 'No user found with the specified id.'
+        });
+    });
+});
+
+describe("Check the createUser method in the UserController", () => {
+
+    /*
+    * Test the createUser method whenever there is
+    * no user specified in the body.
+    * @author Ruben Fricke
+    */
+    test('Create the user whenever the body is invalid.', () => {
+        let req = mockRequest();
+        req.body = null;
+        let res = mockResponse();
+
+        controller.createUser(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(createUser).not.toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            'success': false,
+            'error': 'No user specified to create.'
+        });
+    });
+
+    /*
+    * Test the createUser method whenever there is
+    * a valid specified user in the body.
+    * @author Ruben Fricke
+    */
+    test('Create the user whenever the body is valid.', () => {
+        let req = mockRequest();
+        req.body = {
+            username: 'New user',
+            email: 'user@mail.com',
+            password: '5a598edac7133a65ae8f38fdabe1d8ae'
+        };
+        let res = mockResponse();
+
+        let returnObject = req.body['id'] = Math.max.apply(Math, userArray.map(function(o) {return o.id})) + 1;
+        createUser.mockReturnValueOnce(returnObject);
+
+        controller.createUser(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(201);
+        expect(createUser).toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            'success': true,
+            'data': returnObject
         });
     });
 });

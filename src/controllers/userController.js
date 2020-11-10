@@ -31,7 +31,7 @@ exports.getUserById = (req, res) => {
     }
 
     let user = userService.getUserById(userId);
-    if (user[0] !== (undefined || null)) {
+    if (!isEmpty(user)) {
         return res.status(200).json({
             success: true,
             data: user
@@ -40,7 +40,7 @@ exports.getUserById = (req, res) => {
 
   return res.status(404).json({
     success: false,
-    error: 'No user found',
+    error: 'No user found with the specified id.',
   })
 };
 
@@ -51,10 +51,17 @@ exports.getUserById = (req, res) => {
 * @access Public
 */
 exports.createUser = (req, res) => {
-    userService.createUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
+    let userToCreate = req.body;
+    if (userToCreate == null) {
+        return res.status(400).json({
+            success: false,
+            error: 'No user specified to create.'
+        });
+    }
+    let result = userService.createUser(userToCreate);
+    return res.status(201).json({
+        success: true,
+        data: result
     });
 };
 
@@ -85,3 +92,7 @@ exports.deleteUser = (req, res) => {
         error: 'No user found',
     });
 };
+
+function isEmpty(obj) {
+    return !Object.keys(obj).length;
+}
