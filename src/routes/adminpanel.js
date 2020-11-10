@@ -4,6 +4,7 @@ const router = express.Router();
 // Controller Methods
 const {
     eventOverview,
+    detailsOverview
         } = require('../controllers/eventControntroller');
 
 /*
@@ -12,5 +13,8 @@ const {
 */
 router.route('/')
         .get(eventOverview);
+
+router.route('/events/details/:id')
+        .get(detailsOverview)
 
 module.exports = router;

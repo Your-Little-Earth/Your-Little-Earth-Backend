@@ -31,7 +31,7 @@ function returnAllEvents() {
 */
 function returnEventById(id) {
     console.info(`Retrieving event with specified id: ${id}`);
-    return userArray.filter(event => event.id == id);
+    return eventArray.filter(event => event.id == id);
 }
 
 /*
