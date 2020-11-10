@@ -4,7 +4,9 @@ const colors = require('colors');
 const helmet = require('helmet');
 const cors = require('cors');
 const notFound = require('./middleware/notFound');
+const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
+
 
 dotenv.config({ path: 'src/config/config.env' });
 
@@ -25,7 +27,8 @@ app.use(helmet());
 app.use(express.json());
 
 // All routes here
-app.use('/api/users', require('./routes/user'));
+app.use('/api/users', authenticateToken, require('./routes/user'));
+app.use('/api/login', require('./routes/login'));
 
 // Custom middleware here
 app.use(notFound);
