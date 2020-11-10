@@ -114,23 +114,12 @@ exports.deleteUser = (req, res) => {
     success: false,
     error: 'No user found with the specified id.',
   })
-
-
-
-
-
-    if(foundUser === null) {
-        return res.status(404).json({
-            success: false,
-            error: 'No user found with the specified id.',
-        });
-    }
-
-    return res.status(200).json({
-        success: true
-    });
 };
 
+/*
+* Method that checks if an object is empty.
+* @author Ruben Fricke
+*/
 function isEmpty(obj) {
     return !Object.keys(obj).length;
 }
