@@ -8,20 +8,20 @@ const userArray = [
     {
         id: 2,
         username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrvunurp@urp.urp',
-        password: 'Hashed_urpp_password'
+        email: 'mrgsdgd@urp.urp',
+        password: 'Hashed_urdgfp_password'
     },
     {
         id: 3,
         username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrvunurp@urp.urp',
-        password: 'Hashed_urpp_password'
+        email: 'mrvundgsg@urp.urp',
+        password: 'Hashed_fdgfp_password'
     },
     {
         id: 4,
-        username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrvunurp@urp.urp',
-        password: 'Hashed_urpp_password'
+        username: 'lUrRrsfergSSSSS',
+        email: 'mrgdsgurp@urp.urp',
+        password: 'Hashed_udfd_password'
     },
 ];
 
@@ -43,6 +43,11 @@ function returnAllUser() {
 function returnUserById(id) {
     console.info(`Retrieving user with specified id: ${id}`);
     return userArray.filter(user => user.id == id);
+}
+
+function returnUserByEmail(email) {
+    console.info(`Retrieving user with specified email: ${email}`);
+    return userArray.filter(user => user.email == email);
 }
 
 /*
@@ -80,6 +85,7 @@ function deleteUser(id) {
 module.exports = {
     returnAllUser,
     returnUserById,
+    returnUserByEmail,
     createUser,
     updateUser,
     deleteUser
