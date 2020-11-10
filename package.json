@@ -18,8 +18,6 @@
   },
   "homepage": "https://github.com/My-Little-Earth/My-Little-Earth-Backend#readme",
   "dependencies": {
-    "@cloudant/cloudant": "^4.3.0",
-    "cloudant-quickstart": "^1.25.5",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
