@@ -30,6 +30,7 @@ app.use(express.json());
 
 // All routes here
 app.use('/api/users', authenticateToken, require('./routes/user'));
+app.use('/api/login', require('./routes/login'));
 app.use(errorHandler);
 
 app.use(bodyParser);
@@ -38,8 +39,6 @@ const PORT = process.env.PORT || 5001;
 
 app.listen(PORT,
   console.log(`Server up and running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
-
-app.use('/api/login', require('./routes/login'));
 
 // Custom middleware here
 app.use(notFound);
