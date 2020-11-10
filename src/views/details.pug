@@ -1,0 +1,16 @@
+extends layout
+block content
+    div.container
+        div.p-2
+            a.btn-btn-primary Back
+        div.p-2
+            table.table
+                tr
+                    th(scope="col-3") Event
+                    td #{event.name}
+                tr
+                    th(scope="col-3") Description
+                    td #{event.description}
+                tr
+                    th(scope="col-3") Points
+                    td #{event.points}
