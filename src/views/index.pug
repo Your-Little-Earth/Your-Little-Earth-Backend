@@ -1,9 +1,22 @@
 extends layout
 block content
-    div
-        h1 Admin Panel
-    div
-        a Add new event
-    div
-        ul
-            
+    div.container-fluid
+        div.row.main-admin-row
+            div.col-12
+                h1 Admin Panel
+        div.container
+            div.p-2
+                a.btn.btn-primary Add new event
+            div
+                table.table
+                    thead
+                        tr
+                            th(scope="col-3") Event
+                            th(scope="col-6") Description
+                            th(scope="col-3")
+                    tbody
+                        each event, i in events
+                            tr
+                                td= event.name
+                                td= event.shortDescription
+                                td
