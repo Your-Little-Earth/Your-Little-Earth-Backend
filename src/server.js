@@ -5,8 +5,10 @@ const colors = require('colors');
 const helmet = require('helmet');
 const cors = require('cors');
 const notFound = require('./middleware/notFound');
+const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
+
 
 dotenv.config({ path: 'src/config/config.env' });
 
@@ -27,10 +29,7 @@ app.use(helmet());
 app.use(express.json());
 
 // All routes here
-app.use('/api/users', require('./routes/user'));
-
-// Custom middleware here
-app.use(notFound);
+app.use('/api/users', authenticateToken, require('./routes/user'));
 app.use(errorHandler);
 
 app.use(bodyParser);
@@ -39,3 +38,8 @@ const PORT = process.env.PORT || 5001;
 
 app.listen(PORT,
   console.log(`Server up and running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
+
+app.use('/api/login', require('./routes/login'));
+
+// Custom middleware here
+app.use(notFound);

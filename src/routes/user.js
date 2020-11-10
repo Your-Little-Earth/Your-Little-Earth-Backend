@@ -9,6 +9,7 @@ const {
     deleteUser,
     updateUser
         } = require('../controllers/userController');
+const { loginUser } = require('../controllers/loginController');
 
 /*
 * Routes for user endpoints without any route parameter
@@ -27,6 +28,6 @@ router.route('/')
 router.route('/:id')
   .get(getUserById)
   .delete(deleteUser)
-  .put(updateUser);
+  .put(updateUser)
 
 module.exports = router;

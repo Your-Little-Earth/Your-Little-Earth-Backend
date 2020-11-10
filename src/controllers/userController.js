@@ -26,7 +26,7 @@ exports.getUserById = (req, res) => {
     if(userId <= 0) {
         return res.status(400).json({
             success: false,
-            error: 'The specified id is invalid.',
+            error: 'The specified id is invwalid.',
         });
     }
 
