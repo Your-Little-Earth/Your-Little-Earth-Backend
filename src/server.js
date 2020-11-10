@@ -33,10 +33,7 @@ app.use(express.json());
 
 // All routes here
 app.use('/api/users', require('./routes/user'));
-
-app.get('/', function(req, res) {
-    res.render('index');
-});
+app.use('/adminpanel', require('./routes/adminpanel'));
 
 // Custom middleware here
 app.use(notFound);
