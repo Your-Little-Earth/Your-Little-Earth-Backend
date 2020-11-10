@@ -1,3 +1,4 @@
+const console = require('better-console');
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
@@ -6,6 +7,7 @@ const cors = require('cors');
 const notFound = require('./middleware/notFound');
 const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
+const bodyParser = require('body-parser');
 
 
 dotenv.config({ path: 'src/config/config.env' });
@@ -33,6 +35,8 @@ app.use('/api/login', require('./routes/login'));
 // Custom middleware here
 app.use(notFound);
 app.use(errorHandler);
+
+app.use(bodyParser);
 
 const PORT = process.env.PORT || 5001;
 

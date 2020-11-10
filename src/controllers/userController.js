@@ -22,17 +22,25 @@ exports.getAllUsers = (req, res) => {
 * @access Public
 */
 exports.getUserById = (req, res) => {
-  const user = userService.getUserById(Number(req.params.id));
-  if (user !== undefined) {
-    return res.status(200).json({
-      success: true,
-      data: user
-    });
-  }
+    let userId = Number(req.params.id);
+    if(userId <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        });
+    }
+
+    let user = userService.getUserById(userId);
+    if (!isEmpty(user)) {
+        return res.status(200).json({
+            success: true,
+            data: user
+        });
+    }
 
   return res.status(404).json({
     success: false,
-    error: 'No user found',
+    error: 'No user found with the specified id.',
   })
 };
 
@@ -43,10 +51,17 @@ exports.getUserById = (req, res) => {
 * @access Public
 */
 exports.createUser = (req, res) => {
-    userService.createUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
+    let userToCreate = req.body;
+    if (userToCreate == null) {
+        return res.status(400).json({
+            success: false,
+            error: 'No user specified to create.'
+        });
+    }
+    let result = userService.createUser(userToCreate);
+    return res.status(201).json({
+        success: true,
+        data: result
     });
 };
 
@@ -57,10 +72,17 @@ exports.createUser = (req, res) => {
 * @access Public
 */
 exports.updateUser = (req, res) => {
-    userService.updateUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
+    let userId = Number(req.params.id);
+    if(userId <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        });
+    }
+    let updatedUser = userService.updateUser();
+    return res.status(200).json({
+        success: true,
+        data: updatedUser
     });
 };
 
@@ -71,9 +93,33 @@ exports.updateUser = (req, res) => {
 * @access Public
 */
 exports.deleteUser = (req, res) => {
-    userService.deleteUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
-    });
+    if(req.params.id <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        });
+    }
+
+    let foundUser = userService.getUserById(req.params.id);
+
+    if (isEmpty(foundUser)) {
+        userService.deleteUser();
+        return res.status(200).json({
+            success: true,
+            data: foundUser
+        });
+    }
+
+  return res.status(404).json({
+    success: false,
+    error: 'No user found with the specified id.',
+  })
 };
+
+/*
+* Method that checks if an object is empty.
+* @author Ruben Fricke
+*/
+function isEmpty(obj) {
+    return !Object.keys(obj).length;
+}
