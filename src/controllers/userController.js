@@ -93,10 +93,41 @@ exports.updateUser = (req, res) => {
 * @access Public
 */
 exports.deleteUser = (req, res) => {
-    userService.deleteUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
+    if(req.params.id <= 0) {
+        return res.status(400).json({
+            success: false,
+            error: 'The specified id is invalid.',
+        });
+    }
+
+    let foundUser = userService.getUserById(req.params.id);
+
+    if (isEmpty(foundUser)) {
+        userService.deleteUser();
+        return res.status(200).json({
+            success: true,
+            data: foundUser
+        });
+    }
+
+  return res.status(404).json({
+    success: false,
+    error: 'No user found with the specified id.',
+  })
+
+
+
+
+
+    if(foundUser === null) {
+        return res.status(404).json({
+            success: false,
+            error: 'No user found with the specified id.',
+        });
+    }
+
+    return res.status(200).json({
+        success: true
     });
 };
 

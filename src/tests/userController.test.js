@@ -2,7 +2,7 @@ jest.mock('../services/userService');
 
 const { mockRequest, mockResponse } = require('../utils/interceptor');
 const controller = require('../controllers/userController');
-const { getAllUsers, getUserById, createUser, updateUser } = require('../services/UserService');
+const { getAllUsers, getUserById, createUser, updateUser, deleteUser } = require('../services/UserService');
 
 const userArray = [
     {
@@ -241,3 +241,70 @@ describe("Check the updateUser method in the UserController", () => {
 
     });
 });
+
+// describe("Check the deleteUser method in the UserController", () => {
+
+//     /*
+//     * Test the deleteUser method whenever the specified id is valid.
+//     * @author Ruben Fricke
+//     */
+//     test('Delete the user whenever the id is valid.', () => {
+//         let req = mockRequest();
+//         req.params.id = 2;
+//         let res = mockResponse();
+
+//         let returnedUser = userArray.filter(user => user.id == req.params.id);
+//         getUserById.mockReturnValueOnce(returnedUser);
+
+//         controller.deleteUser(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(200);
+//         expect(deleteUser).toHaveBeenCalled();
+//         expect(res.json).toHaveBeenCalledWith({
+//             "success": true
+//         });
+//     });
+
+//     /*
+//     * Test the deleteUser method whenever the specified id is invalid.
+//     * @author Ruben Fricke
+//     */
+//     test('Delete the user whenever the id is invalid.', () => {
+//         let req = mockRequest();
+//         req.params.id = Number.MIN_SAFE_INTEGER;
+//         let res = mockResponse();
+
+//         controller.deleteUser(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(400);
+//         expect(deleteUser).not.toHaveBeenCalled();
+//         expect(res.json).toHaveBeenCalledWith({
+//             'success': false,
+//             'error': 'The specified id is invalid.',
+//         });
+//     });
+
+//     /*
+//     * Test the deleteUser method whenever the user could not
+//     * be found with the specified id..
+//     * @author Ruben Fricke
+//     */
+//     test('Delete the user whenever the user could not be found.', () => {
+//         let req = mockRequest();
+//         req.params.id = Number.MAX_SAFE_INTEGER;
+//         let res = mockResponse();
+
+//         let returnedUser = userArray.filter(user => user.id == req.params.id);
+//         getUserById.mockReturnValueOnce(returnedUser);
+//         deleteUser.mockReturnValueOnce();
+
+//         controller.deleteUser(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(404);
+//         expect(deleteUser).toHaveBeenCalled();
+//         expect(res.json).toHaveBeenCalledWith({
+//             'success': false,
+//             'error': 'No user found with the specified id.',
+//         });
+//     });
+// });
