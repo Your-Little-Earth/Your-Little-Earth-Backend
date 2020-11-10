@@ -13,10 +13,11 @@ block content
                         tr
                             th(scope="col-3") Event
                             th(scope="col-6") Description
-                            th(scope="col-3")
+                            th(scope="col-1")
                     tbody
                         each event, i in events
                             tr
                                 td= event.name
-                                td= event.shortDescription
+                                td= event.description
                                 td
+                                    a.btn.btn-primary.px-2 More info

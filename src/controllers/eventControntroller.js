@@ -17,7 +17,6 @@ const eventArray = [
 
 exports.eventOverview = (req, res) => {
     const events = eventService.returnAllEvents();
-    console.log(events);
     return res.render('index',{
         events:events
     });
