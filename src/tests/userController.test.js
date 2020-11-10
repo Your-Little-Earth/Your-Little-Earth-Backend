@@ -208,4 +208,36 @@ describe("Check the updateUser method in the UserController", () => {
             'error': 'The specified id is invalid.'
         });
     });
+
+    /*
+    * Test the updateUser method whenever the body is valid.
+    * @author Ruben Fricke
+    */
+    test('Update the user whenever the id is valid.', () => {
+        let req = mockRequest();
+        req.params.id = 1;
+        req.params.body = {
+            username: 'Updated user',
+            email: 'user@mail.com',
+            password: 'f64ff3c172fe566cc98748a600560566'
+        };
+        let res = mockResponse();
+
+        let returnObject = userArray.filter(user => user.id == req.params.id);
+        returnObject[0].username = req.params.body.username;
+        returnObject[0].email = req.params.body.email;
+        returnObject[0].password = req.params.body.password;
+
+        updateUser.mockReturnValueOnce(returnObject);
+
+        controller.updateUser(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(updateUser).toHaveBeenCalled();
+        expect(res.json).toHaveBeenCalledWith({
+            'success': true,
+            'data': returnObject
+        });
+
+    });
 });

@@ -79,10 +79,10 @@ exports.updateUser = (req, res) => {
             error: 'The specified id is invalid.',
         });
     }
-    userService.updateUser();
-    return res.status(404).json({
-        success: false,
-        error: 'No user found',
+    let updatedUser = userService.updateUser();
+    return res.status(200).json({
+        success: true,
+        data: updatedUser
     });
 };
 
