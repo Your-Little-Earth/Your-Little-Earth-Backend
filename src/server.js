@@ -17,6 +17,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static(path.join(__dirname, './public')));
 
+app.use(express.urlencoded({ extended: false }))
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // Development Setup
 if (process.env.NODE_ENV === 'development') {
   // require morgan if in development mode
@@ -38,8 +42,6 @@ app.use('/adminpanel', require('./routes/adminpanel'));
 // Custom middleware here
 app.use(notFound);
 app.use(errorHandler);
-
-app.use(bodyParser);
 
 const PORT = process.env.PORT || 5001;
 
