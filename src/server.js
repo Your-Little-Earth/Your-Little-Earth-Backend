@@ -9,7 +9,8 @@ const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsondoc = require("swagger-jsdoc");
 
 dotenv.config({ path: 'src/config/config.env' });
 
