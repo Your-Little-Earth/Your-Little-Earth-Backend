@@ -41,7 +41,9 @@ function returnEventById(id) {
 */
 function createEvent(event) {
     console.info("Creating event");
-    eventArray.push(event);
+    let model = JSON.parse(JSON.stringify(event));
+    model['id'] = Math.max.apply(Math, eventArray.map(function(o) {return o.id})) + 1;
+    eventArray.push(model);
 }
 
 /*
