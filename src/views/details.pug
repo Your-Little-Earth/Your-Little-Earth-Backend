@@ -1,0 +1,17 @@
+extends layout
+block content
+    h1 #{name}
+    div.container
+        div.p-2
+            a.btn-btn-primary(href='/adminpanel') Back
+        div.p-2
+            table.table
+                tr
+                    th(scope="col-3") Event
+                    td= name
+                tr
+                    th(scope="col-3") Description
+                    td= description
+                tr
+                    th(scope="col-3") Points
+                    td= points
