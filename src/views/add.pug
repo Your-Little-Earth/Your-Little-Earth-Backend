@@ -1,0 +1,13 @@
+extends layout
+block content
+    form(name='addevent' method='POST', action='/adminpanel/events/create')
+        #form-group
+            label Name:
+            input.form-control(name='name', type='text')
+        #form-group
+            label Description:
+            input.form-control(name='description', type='text')
+        #form-group
+            label Points:
+            input.form-control(name='points', type='number')
+        input.btn.btn-primary.mt-3(type='submit', value='Add')
