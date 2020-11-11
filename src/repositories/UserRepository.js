@@ -1,32 +1,5 @@
 const { User } = require('../models');
 
-const userArray = [
-    {
-        id: 1,
-        username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrvunurp@urp.urp',
-        password: 'Hashed_urpp_password'
-    },
-    {
-        id: 2,
-        username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrgsdgd@urp.urp',
-        password: 'Hashed_urdgfp_password'
-    },
-    {
-        id: 3,
-        username: 'lUrRrRrSsSsSSSSS',
-        email: 'mrvundgsg@urp.urp',
-        password: 'Hashed_fdgfp_password'
-    },
-    {
-        id: 4,
-        username: 'lUrRrsfergSSSSS',
-        email: 'mrgdsgurp@urp.urp',
-        password: 'Hashed_udfd_password'
-    },
-];
-
 /*
 * This method communicates with the database and will
 * retrieve all the users in the database.
@@ -92,6 +65,8 @@ function createUser(user) {
         username: user.username,
         email: user.email,
         password: user.password
+    }).then((createdUser) => {
+        return createdUser;
     }).catch((err) => {
         if (err) {
             console.warn(err);
@@ -108,8 +83,16 @@ function createUser(user) {
 */
 function updateUser(id, user) {
     console.info(`Updating user with specified id: ${id}`);
-    let index = userArray.findIndex(user => user.id == id);
-    userArray[index] = user;
+    User.update(user, {where: {
+        id: id
+    }}).then((updatedUser) => {
+        return updatedUser;
+    }).catch((err) => {
+        if (err) {
+            console.warn(err);
+            return(err);
+        }
+    });
 }
 
 /*
@@ -119,8 +102,11 @@ function updateUser(id, user) {
 */
 function deleteUser(id) {
     console.info(`Deleting user with specified id: ${id}`);
-    let index = userArray.findIndex(user => user.id == id);
-    userArray.splice(index, 1);
+    User.destroy({
+        where: {
+            id: id
+        }
+    });
 }
 
 module.exports = {
