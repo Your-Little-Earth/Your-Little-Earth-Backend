@@ -4,7 +4,9 @@ const router = express.Router();
 // Controller Methods
 const {
     eventOverview,
-    detailsOverview
+    detailsOverview,
+    eventCreateView,
+    eventCreate
         } = require('../controllers/eventControntroller');
 
 /*
@@ -14,6 +16,18 @@ const {
 router.route('/')
         .get(eventOverview);
 
+/*
+* Routes for admin panel for creating an event.
+* @author Ruben Fricke
+*/
+router.route('/events/create')
+        .get(eventCreateView)
+        .post(eventCreate);
+
+/*
+* Routes for admin panel for creating an event.
+* @author Ruben Fricke
+*/
 router.route('/events/details/:id')
         .get(detailsOverview)
 
