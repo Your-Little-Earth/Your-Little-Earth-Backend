@@ -1,3 +1,5 @@
+const { User } = require('../models');
+
 const userArray = [
     {
         id: 1,
@@ -32,7 +34,12 @@ const userArray = [
 */
 function returnAllUser() {
     console.info("Retrieving all users");
-    return userArray;
+    User.findAll().then((users) => {
+        return users;
+    }).catch((err) => {
+        console.log(err);
+        return err;
+    });
 }
 
 /*
@@ -42,12 +49,36 @@ function returnAllUser() {
 */
 function returnUserById(id) {
     console.info(`Retrieving user with specified id: ${id}`);
-    return userArray.filter(user => user.id == id);
+    User.find({
+        where: {
+            id: id
+        }
+    }).then((user) => {
+        return user;
+    }).catch((err) => {
+        console.log(err);
+        return err;
+    })
+
 }
 
+/*
+* This method communicates with the database and will
+* retrieve the user with the specified email in the database.
+* @author Ruben Fricke
+*/
 function returnUserByEmail(email) {
     console.info(`Retrieving user with specified email: ${email}`);
-    return userArray.filter(user => user.email == email);
+    User.find({
+        where: {
+            email: email
+        }
+    }).then((user) => {
+        return user;
+    }).catch((err) => {
+        console.log(err);
+        return err;
+    })
 }
 
 /*
@@ -57,7 +88,17 @@ function returnUserByEmail(email) {
 */
 function createUser(user) {
     console.info("Creating user");
-    userArray.push(user);
+    User.create({
+        username: user.username,
+        email: user.email,
+        password: user.password
+    }).catch((err) => {
+        if (err) {
+            console.warn(err);
+            return(err);
+        }
+    });
+    return true;
 }
 
 /*
