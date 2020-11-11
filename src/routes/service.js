@@ -8,9 +8,9 @@ const {
     createService
     } = require('../controllers/serviceController');
 
-    router.route('/car')
-     .get(getAllServices)
-     .post(createService);
+    // router.route('/car')
+    //  .get(getAllServices)
+    //  .post(createService);
 
     router.route('/car/:id')
      .get(getServiceById)
