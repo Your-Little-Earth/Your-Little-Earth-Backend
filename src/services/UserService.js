@@ -47,7 +47,8 @@ function updateUser(id, updatedUser) {
 
 function validateLoginCredentials(email, password) {
     let user = userRepository.returnUserByEmail(email);
-    if(!user) return res.status(404);
+    if(user == null) return res.status(404);
+
     if (user[0].password != password) return {status: false};
     return {
         status: true,
