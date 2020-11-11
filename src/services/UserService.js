@@ -47,15 +47,18 @@ function updateUser(id, updatedUser) {
 
 function validateLoginCredentials(email, password) {
     let user = userRepository.returnUserByEmail(email);
-    if (user[0].password != password) return false;
-    return true;
+    if (user[0].password != password) return {status: false};
+    return {
+        status: true,
+        data: user
+    };
 }
 
 module.exports = {
     getAllUsers,
     createUser,
     getUserById,
-    getUserByEmail,
     deleteUser,
-    updateUser
+    updateUser,
+    validateLoginCredentials
 }

@@ -1,7 +1,7 @@
 const eventService = require('../services/EventService');
-var ValidateModel = require('validate-model');
-var EventValidation = require('../Validators/eventValidator')
-var validateAll = ValidateModel.validateAll;
+// var ValidateModel = require('validate-model');
+// var EventValidation = require('../Validators/eventValidator')
+// var validateAll = ValidateModel.validateAll;
 
 exports.eventOverview = (req, res) => {
     const events = eventService.returnAllEvents();

@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
     "test": "jest"
   },
@@ -26,11 +26,12 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.2.0",
-    "mysql": "^2.18.1",
-    "pug": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "passport-http-bearer": "^1.0.1"
+    "passport-http-bearer": "^1.0.1",
+    "pug": "^3.0.0",
+    "swagger-jsdoc": "^5.0.1",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

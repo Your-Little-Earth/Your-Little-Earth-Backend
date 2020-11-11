@@ -9,11 +9,29 @@ const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 dotenv.config({ path: 'src/config/config.env' });
 
 const app = express();
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: 'Your Little Earth API',
+            description: 'Project for hackathon: Call for Code University Spot Challenge for Europe, Middle East and Africa: Students vs Climate Change',
+            contact: {
+                name: 'Ruben Fricke'
+            },
+            servers: ['https://localhost:5000']
+        }
+    },
+    apis: ['./routes/user']
+}
+
+const swaggerDocs = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -25,9 +43,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Development Setup
 if (process.env.NODE_ENV === 'development') {
-  // require morgan if in development mode
-  // setting morgan to dev: https://www.npmjs.com/package/morgan#dev
-  app.use(require('morgan')('dev'));
+    // require morgan if in development mode
+    // setting morgan to dev: https://www.npmjs.com/package/morgan#dev
+    app.use(require('morgan')('dev'));
 }
 
 // Put all the server-wide middleware here

@@ -1,3 +1,13 @@
+/**
+ * @swagger
+ * /:
+ * get:
+ *  description: Test description
+ *  responses:
+ *      '200':
+ *          description: Success
+ */
+
 const express = require('express');
 const router = express.Router();
 

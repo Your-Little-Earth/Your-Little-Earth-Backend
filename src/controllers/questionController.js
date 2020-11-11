@@ -1,7 +1,8 @@
-const questionService = require('../services/QuestionService');
+// const questionService = require('../services/QuestionService');
 
 exports.questionOverview = (req, res) => {
-    const questions = questionService.returnAllQuestions();
+    // const questions = questionService.returnAllQuestions();
+
     return res.render('question-overview', {
         questions: questions
     });
