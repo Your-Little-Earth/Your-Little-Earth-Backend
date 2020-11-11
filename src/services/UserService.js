@@ -27,10 +27,6 @@ function getUserById(id) {
     return userRepository.returnUserById(id);
 }
 
-function getUserByEmail(email) {
-    return userRepository.returnUserByEmail(email);
-}
-
 /*
 * This method communicates with the repository and will
 * delete the user with the specified id.
@@ -47,6 +43,12 @@ function deleteUser(id) {
 */
 function updateUser(id, updatedUser) {
     return userRepository.updateUser(id, updatedUser);
+}
+
+function validateLoginCredentials(email, password) {
+    let user = userRepository.returnUserByEmail(email);
+    if (user[0].password != password) return false;
+    return true;
 }
 
 module.exports = {
