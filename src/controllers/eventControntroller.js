@@ -1,4 +1,7 @@
 const eventService = require('../services/EventService');
+var ValidateModel = require('validate-model');
+var EventValidation = require('../Validators/eventValidator')
+var validateAll = ValidateModel.validateAll;
 
 exports.eventOverview = (req, res) => {
     const events = eventService.returnAllEvents();
@@ -17,22 +20,19 @@ exports.detailsOverview = (req, res) => {
 };
 
 exports.eventCreateView = (req, res) => {
-    return res.sender('create-event');
+    res.render('add');
 };
 
 exports.eventCreate = (req, res) => {
-    req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('description', 'Description is required').notEmpty();
-    req.checkBody('points', 'Points should be specified').notEmpty();
-
-    let errors = req.validationErrors();
-
-    if(errors) {
+    var eventValidation = validateAll(EventValidation, req.body);
+    if(!eventValidation) {
+        console.warn(`Errors by submitting event: ${eventValidation.messages}`);
         res.render('create-event', {
-            errors: errors
+            errors: eventValidation.messages
         });
     } else {
         let eventToCreate = req.body;
         eventService.createEvent(eventToCreate);
+        res.redirect('/adminpanel');
     }
 };
