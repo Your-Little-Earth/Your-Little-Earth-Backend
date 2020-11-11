@@ -67,8 +67,12 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT,
-  console.log(`Server up and running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
+const db = require('./models');
+
+db.sequelize.sync().then((req) => {
+    app.listen(PORT,
+        console.log(`Server up and running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold));
+});
 
 // Custom middleware here
 app.use(notFound);
