@@ -12,7 +12,7 @@ const {
     //  .get(getAllServices)
     //  .post(createService);
 
-    router.route('/car/:id')
-     .get(getServiceById)
+    // router.route('/car/:id')
+    //  .get(getServiceById)
 
 module.exports = router;
