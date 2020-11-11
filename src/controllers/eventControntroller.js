@@ -15,7 +15,8 @@ exports.detailsOverview = (req, res) => {
     let event = eventService.returnEventById(eventId)[0];
     res.render('details', {
         name: event.name,
-        description: event.description
+        description: event.description,
+        points: event.points
     });
 };
 
