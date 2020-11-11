@@ -27,10 +27,6 @@ function getUserById(id) {
     return userRepository.returnUserById(id);
 }
 
-function getUserByEmail(email) {
-    return userRepository.returnUserByEmail(email);
-}
-
 /*
 * This method communicates with the repository and will
 * delete the user with the specified id.
@@ -53,7 +49,6 @@ module.exports = {
     getAllUsers,
     createUser,
     getUserById,
-    getUserByEmail,
     deleteUser,
     updateUser
 }
