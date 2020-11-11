@@ -7,8 +7,14 @@ const {
     detailsOverview,
     eventCreateView,
     eventCreate
-        } = require('../controllers/eventControntroller');
+} = require('../controllers/eventControntroller');
 
+const {
+    questionOverview,
+    questionCreateView,
+    questionCreate,
+    questionDetails
+} = require('../controllers/questionController');
 /*
 * Routes for admin panel without any route parameter.
 * @author Ruben Fricke
@@ -30,5 +36,16 @@ router.route('/events/create')
 */
 router.route('/events/details/:id')
         .get(detailsOverview)
+
+
+router.route('/')
+    .get(questionOverview);
+
+router.route('/questions/create')
+    .get(questionCreateView)
+    .post(questionCreate);
+
+router.route('/events/details/:id')
+    .get(questionDetails);
 
 module.exports = router;
