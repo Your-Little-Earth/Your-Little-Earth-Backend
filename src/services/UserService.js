@@ -55,7 +55,7 @@ module.exports = {
     getAllUsers,
     createUser,
     getUserById,
-    getUserByEmail,
     deleteUser,
-    updateUser
+    updateUser,
+    validateLoginCredentials
 }
