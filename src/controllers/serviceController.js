@@ -11,7 +11,7 @@ exports.getAllServices = (req, res) => {
 };
 
 exports.getServiceById = (req, res) => {
-    let userId = Number(req.params.userid);
+    let userId = Number(req.params.id);
     if(userId <= 0) {
         return res.status(400).json({
             success: false,
