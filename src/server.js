@@ -18,17 +18,29 @@ const app = express();
 
 const swaggerOptions = {
     swaggerDefinition: {
+        security: [ { bearerAuth: [] } ],
+        basePath: '/api',
         info: {
             title: 'Your Little Earth API',
             description: 'Project for hackathon: Call for Code University Spot Challenge for Europe, Middle East and Africa: Students vs Climate Change',
             contact: {
-                name: 'Ruben Fricke'
+                name: 'Ruben Fricke',
+                email: "427757@student.fontys.nl"
             },
-            servers: ['https://localhost:5000']
-        }
+            servers: ['https://localhost:5000/api']
+        },
+        securityDefinitions: {
+            bearerAuth: {
+              type: 'apiKey',
+              name: 'authorization',
+              scheme: 'bearer',
+              in: 'header',
+            },
+          },
     },
-    apis: ['./routes/user']
+    apis: ['src/routes/user.js'],
 }
+
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
