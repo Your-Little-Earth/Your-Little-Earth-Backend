@@ -9,29 +9,29 @@ const authenticateToken = require('./middleware/authenticateToken');
 const errorHandler = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
 const path = require('path');
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerJsdoc = require("swagger-jsdoc");
 
 dotenv.config({ path: 'src/config/config.env' });
 
 const app = express();
 
-const swaggerOptions = {
-    swaggerDefinition: {
-        info: {
-            title: 'Your Little Earth API',
-            description: 'Project for hackathon: Call for Code University Spot Challenge for Europe, Middle East and Africa: Students vs Climate Change',
-            contact: {
-                name: 'Ruben Fricke'
-            },
-            servers: ['https://localhost:5000']
-        }
-    },
-    apis: ['./routes/user']
-}
+// const swaggerOptions = {
+//     swaggerDefinition: {
+//         info: {
+//             title: 'Your Little Earth API',
+//             description: 'Project for hackathon: Call for Code University Spot Challenge for Europe, Middle East and Africa: Students vs Climate Change',
+//             contact: {
+//                 name: 'Ruben Fricke'
+//             },
+//             servers: ['https://localhost:5000']
+//         }
+//     },
+//     apis: ['./routes/user']
+// }
 
-const swaggerDocs = swaggerJsdoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+// const swaggerDocs = swaggerJsdoc(swaggerOptions);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -56,8 +56,9 @@ app.use(helmet());
 app.use(express.json());
 
 // All routes here
-app.use('/api/users', authenticateToken, require('./routes/user'));
+app.use('/api/users', require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
+//app.use('/api/service', require('./routes/service'));
 app.use('/adminpanel', require('./routes/adminpanel'));
 
 // Custom middleware here
