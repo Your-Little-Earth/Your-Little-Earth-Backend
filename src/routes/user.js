@@ -10,6 +10,23 @@
  *              description: Unable to access this endpoint without being authorized.
  *  post:
  *      description: This endpoint is used for creating a new user and storing this user in the database.
+ *      parameters:
+ *          -   in: body
+ *              name: user
+ *              description: The user to update
+ *              schema:
+ *                  type: object
+ *                  required:
+ *                  -   username
+ *                      email
+ *                      password
+ *                  properties:
+ *                      username:
+ *                          type: string
+ *                      email:
+ *                          type: string
+ *                      password:
+ *                          type: string
  *      responses:
  *          '201':
  *              description: Successfully added the user to the database.
@@ -17,7 +34,71 @@
  *              description: No user specified to create.
  *          '401':
  *              description: Unable to access this endpoint without being authorized.
- *
+ * /users/{id}:
+ *  get:
+ *      description: This endpoint is used for retrieving a single user by id.
+ *      parameters:
+ *          -   in: path
+ *              name: id
+ *              type: integer
+ *              required: true
+ *              description: Numeric ID of the user to get.
+ *      responses:
+ *          '200':
+ *              description: Succesfully retrieved the specified user.
+ *          '400':
+ *              description: The specified id is invalid.
+ *          '401':
+ *              description: Unable to access this endpoint without being authorized.
+ *          '404':
+ *              description: The specified user could not be found.
+ *  delete:
+ *      description: This endpoint is used for deleting a single user by id.
+ *      parameters:
+ *          -   in: path
+ *              name: id
+ *              type: integer
+ *              required: true
+ *              description: Numeric ID of the user to get.
+ *      responses:
+ *          '200':
+ *              description: Succesfully deleted the specified user.
+ *          '400':
+ *              description: The specified id is invalid.
+ *          '401':
+ *              description: Unable to access this endpoint without being authorized.
+ *          '404':
+ *              description: The specified user could not be found.
+ *  put:
+ *      description: This endpoint is used for updating a single user by id.
+ *      parameters:
+ *          -   in: path
+ *              name: id
+ *              type: integer
+ *              required: true
+ *              description: Numeric ID of the user to get.
+ *          -   in: body
+ *              name: user
+ *              description: The user to update
+ *              schema:
+ *                  type: object
+ *                  required:
+ *                  -   username
+ *                      email
+ *                  properties:
+ *                      username:
+ *                          type: string
+ *                      email:
+ *                          type: string
+ *      responses:
+ *          '200':
+ *              description: Succesfully deleted the specified user.
+ *          '400':
+ *              description: The specified id is invalid.
+ *          '401':
+ *              description: Unable to access this endpoint without being authorized.
+ *          '404':
+ *              description: The specified user could not be found.
  */
 
 const express = require('express');
