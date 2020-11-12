@@ -66,3 +66,5 @@ router.route('/:id')
     .get(getAllFriends)
     .post(addFriend)
     .delete(deleteFriend)
+
+module.exports = router;
