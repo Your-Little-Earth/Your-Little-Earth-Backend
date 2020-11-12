@@ -5,7 +5,6 @@ require('dotenv').config();
 exports.loginUser = (req, res) => {
     //Need to hash the req password
     let check = userService.validateLoginCredentials(req.body.email, req.body.password)
-    console.log(check);
     if(check.status) {
         const accesToken = 'Bearer '+ jwt.sign(check.data[0], process.env.ACCES_TOKEN_SECRET);
 
