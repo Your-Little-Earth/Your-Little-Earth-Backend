@@ -1,3 +1,5 @@
+const Chunk = require("./Chunk");
+
 module.exports = (sequelize, DataTypes) => {
     const Earth = sequelize.define("Earth", {
         name: {
@@ -29,6 +31,12 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     });
+
+    Earth.associate = models => {
+        Earth.hasMany(models.Chunk, {
+            onDelete: 'CASCADE'
+        });
+    }
 
     return Earth;
 };
