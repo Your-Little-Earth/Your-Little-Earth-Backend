@@ -17,7 +17,7 @@
  *              description: No user specified to create.
  *          '401':
  *              description: Unable to access this endpoint without being authorized.
- * 
+ *
  */
 
 const express = require('express');

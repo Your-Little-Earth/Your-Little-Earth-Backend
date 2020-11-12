@@ -50,7 +50,9 @@ async function updateUser(id, updatedUser) {
 
 async function validateLoginCredentials(email, password) {
     let user = await userRepository.returnUserByEmail(email);
-    if(!user) return res.status(404);
+
+    if(user[0] == null) return {status: false};
+
     if (user[0].password != password) return {status: false};
     return {
         status: true,
