@@ -2,7 +2,8 @@ async function returnAllFriendsFromAccount() {
     return null;
 }
 
-async function canAddFriend() {
+async function canAddFriend(loggedInUserId, friendId) {
+    
     return null;
 }
 

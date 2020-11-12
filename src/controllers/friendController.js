@@ -1,5 +1,7 @@
 const friendService = require('../services/FriendService');
 const userService = require('../services/UserService');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 exports.getAllFriends = async (req, res) => {
     let friends = await friendService.returnAllFriendsFromAccount(req.params.id);
@@ -12,6 +14,7 @@ exports.getAllFriends = async (req, res) => {
 
 exports.addFriend = async (req, res) => {
     let friendToAdd = req.params.id;
+    let currentId = jwt.verify(req.headers["authorization"], process.env.ACCES_TOKEN_SECRET).id;
     if(friendToAdd <= 0 || friendToAdd === undefined) {
         return res.status(400).json({
             success: false,
@@ -26,7 +29,7 @@ exports.addFriend = async (req, res) => {
         });
     }
 
-    if(!friendService.canAddFriend(friendToAdd)) {
+    if(!friendService.canAddFriend(currentId, friendToAdd)) {
         return res.status(400).json({
             success: false,
             error: 'The friend could not be added'
