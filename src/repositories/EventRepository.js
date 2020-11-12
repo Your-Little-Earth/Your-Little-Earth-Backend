@@ -1,27 +1,19 @@
-
-const eventArray = [
-    {
-        id: 1,
-        name: 'Event 1',
-        description: 'Description',
-        date: new Date(2020, 1, 1)
-    },
-    {
-        id: 2,
-        name: 'Event 2',
-        description: 'Description',
-        date: new Date(2020, 1, 1)
-    }
-];
+const { Event } = require('../models');
 
 /*
 * This method communicates with the database and will
 * retrieve all the events in the database.
 * @author Ruben Fricke
 */
-function returnAllEvents() {
+async function returnAllEvents() {
     console.info("Retrieving all users");
-    return eventArray;
+    return await Event.findAll({
+    }).then((events) => {
+        return events;
+    }).catch((err) => {
+        console.log(err);
+        return err;
+    })
 }
 
 /*
@@ -29,9 +21,18 @@ function returnAllEvents() {
 * retrieve the event with the specified id in the database.
 * @author Ruben Fricke
 */
-function returnEventById(id) {
+async function returnEventById(id) {
     console.info(`Retrieving event with specified id: ${id}`);
-    return eventArray.filter(event => event.id == id);
+    return await Event.findOne({
+        where: {
+            id: id
+        }
+    }).then((event) => {
+        return event;
+    }).catch((err) => {
+        console.log(err);
+        return err;
+    });
 }
 
 /*
@@ -39,11 +40,20 @@ function returnEventById(id) {
 * create the specified event into the database.
 * @author Ruben Fricke
 */
-function createEvent(event) {
+async function createEvent(event) {
     console.info("Creating event");
-    let model = JSON.parse(JSON.stringify(event));
-    model['id'] = Math.max.apply(Math, eventArray.map(function(o) {return o.id})) + 1;
-    eventArray.push(model);
+    return await Event.create({
+        name: event.name,
+        description: event.description,
+        points: event.points
+    }).then((createdEvent) => {
+        return createEvent;
+    }).catch((err) => {
+        if (err) {
+            console.warn(err);
+            return(err);
+        }
+    });
 }
 
 /*
@@ -51,10 +61,18 @@ function createEvent(event) {
 * update the event with the specified id.
 * @author Ruben Fricke
 */
-function updateEvent(id, event) {
+async function updateEvent(id, event) {
     console.info(`Updating event with specified id: ${id}`);
-    let index = eventArray.findIndex(event => event.id == id);
-    eventArray[index] = event;
+    return await Event.update(event, {where: {
+        id: id
+    }}).then((updatedEvent) => {
+        return updatedEvent;
+    }).catch((err) => {
+        if (err) {
+            console.warn(err);
+            return(err);
+        }
+    });
 }
 
 /*
@@ -62,10 +80,13 @@ function updateEvent(id, event) {
 * delete the event with the specified id.
 * @author Ruben Fricke
 */
-function deleteEvent(id) {
+async function deleteEvent(id) {
     console.info(`Deleting event with specified id: ${id}`);
-    let index = eventArray.findIndex(event => event.id == id);
-    eventArray.splice(index, 1);
+    await Event.destroy({
+        where: {
+            id: id
+        }
+    });
 }
 
 module.exports = {

@@ -3,14 +3,14 @@ const eventService = require('../services/EventService');
 // var EventValidation = require('../Validators/eventValidator')
 // var validateAll = ValidateModel.validateAll;
 
-exports.eventOverview = (req, res) => {
+exports.eventOverview = async (req, res) => {
     const events = eventService.returnAllEvents();
     return res.render('index',{
         events:events
     });
 };
 
-exports.detailsOverview = (req, res) => {
+exports.detailsOverview = async (req, res) => {
     let eventId = req.params.id;
     let event = eventService.returnEventById(eventId)[0];
     res.render('details', {
@@ -20,19 +20,18 @@ exports.detailsOverview = (req, res) => {
     });
 };
 
-exports.eventCreateView = (req, res) => {
+exports.eventCreateView = async (req, res) => {
     res.render('add');
 };
 
-exports.eventCreate = (req, res) => {
-    var eventValidation = validateAll(EventValidation, req.body);
-    if(!eventValidation) {
+exports.eventCreate = async (req, res) => {
+    if(false) {
         console.warn(`Errors by submitting event: ${eventValidation.messages}`);
         res.render('create-event', {
             errors: eventValidation.messages
         });
     } else {
-        let eventToCreate = req.body;
+        let eventToCreate = JSON.parse(JSON.stringify(req.body));
         eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
     }

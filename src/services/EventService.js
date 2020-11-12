@@ -5,8 +5,8 @@ const eventRepository = require('../repositories/EventRepository')
 * retrieve all the events.
 * @author Ruben Fricke
 */
-function returnAllEvents() {
-    return eventRepository.returnAllEvents();
+async function returnAllEvents() {
+    return await eventRepository.returnAllEvents();
 }
 
 /*
@@ -14,8 +14,8 @@ function returnAllEvents() {
 * retrieve the user with the specified id.
 * @author Ruben Fricke
 */
-function returnEventById(id) {
-    return eventRepository.returnEventById(id);
+async function returnEventById(id) {
+    return await eventRepository.returnEventById(id);
 }
 
 /*
@@ -23,8 +23,8 @@ function returnEventById(id) {
 * create the specified event.
 * @author Ruben Fricke
 */
-function createEvent(event) {
-    return eventRepository.createEvent(event);
+async function createEvent(event) {
+    return await eventRepository.createEvent(event);
 }
 
 /*
@@ -32,8 +32,8 @@ function createEvent(event) {
 * update the event with the specified id.
 * @author Ruben Fricke
 */
-function updateEvent(id, event) {
-    return eventRepository.updateEvent(id, event);
+async function updateEvent(id, event) {
+    return await eventRepository.updateEvent(id, event);
 }
 
 /*
@@ -41,8 +41,8 @@ function updateEvent(id, event) {
 * delete the event with the specified id.
 * @author Ruben Fricke
 */
-function deleteEvent(id) {
-    return eventRepository.deleteEvent(id);
+async function deleteEvent(id) {
+    return await eventRepository.deleteEvent(id);
 }
 
 module.exports = {
