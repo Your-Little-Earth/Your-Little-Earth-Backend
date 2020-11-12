@@ -1,7 +1,4 @@
 const eventService = require('../services/EventService');
-// var ValidateModel = require('validate-model');
-// var EventValidation = require('../Validators/eventValidator')
-// var validateAll = ValidateModel.validateAll;
 
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();

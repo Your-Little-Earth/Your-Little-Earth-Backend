@@ -38,5 +38,11 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
 
+    Earth.associate = models => {
+        Earth.belongsTo(models.User, {
+            foreignKey: 'userId',
+        })
+    }
+
     return Earth;
 };

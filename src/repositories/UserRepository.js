@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Earth, Chunk } = require('../models');
 
 /*
 * This method communicates with the database and will
@@ -7,8 +7,14 @@ const { User } = require('../models');
 */
 async function returnAllUser() {
     console.info("Retrieving all users");
-    return await User.findAll({
-    }).then((users) => {
+    return await User.findAll(
+        {
+        include: [
+            {model: Earth, include: [Earth.Chunk] }
+        ],
+        raw: true
+    }
+    ).then((users) => {
         return users;
     }).catch((err) => {
         console.log(err);

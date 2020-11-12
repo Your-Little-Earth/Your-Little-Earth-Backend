@@ -11,9 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Chunk.associate = models => {
         Chunk.belongsTo(models.Earth, {
-            foreignKey: {
-                allowNull: false
-            }
+
         });
     }
 
