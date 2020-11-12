@@ -45,7 +45,8 @@ async function returnUserByEmail(email) {
     return await User.findOne({
         where: {
             email: email
-        }
+        },
+        raw: true
     }).then((user) => {
         return user;
     }).catch((err) => {

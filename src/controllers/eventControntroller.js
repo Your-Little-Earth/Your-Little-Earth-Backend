@@ -25,14 +25,13 @@ exports.eventCreateView = async (req, res) => {
 };
 
 exports.eventCreate = async (req, res) => {
-    var eventValidation = validateAll(EventValidation, req.body);
-    if(!eventValidation) {
+    if(false) {
         console.warn(`Errors by submitting event: ${eventValidation.messages}`);
         res.render('create-event', {
             errors: eventValidation.messages
         });
     } else {
-        let eventToCreate = req.body;
+        let eventToCreate = JSON.parse(JSON.stringify(req.body));
         eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
     }

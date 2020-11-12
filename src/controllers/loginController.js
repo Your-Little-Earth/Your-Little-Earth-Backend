@@ -2,11 +2,12 @@ const jwt = require('jsonwebtoken');
 const userService = require('../services/UserService')
 require('dotenv').config();
 
-exports.loginUser = (req, res) => {
+exports.loginUser = async (req, res) => {
     //Need to hash the req password
-    let check = userService.validateLoginCredentials(req.body.email, req.body.password)
+    let check = await userService.validateLoginCredentials(req.body.email, req.body.password)
+    console.log(check.status);
     if(check.status) {
-        const accesToken = 'Bearer '+ jwt.sign(check.data[0], process.env.ACCES_TOKEN_SECRET);
+        const accesToken = 'Bearer '+ jwt.sign(check.data, process.env.ACCES_TOKEN_SECRET);
 
         return res.status(200).json({
             token: accesToken
