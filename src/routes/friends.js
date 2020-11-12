@@ -4,8 +4,11 @@ const router = express.Router();
 /**
  * Controller methods to import
  */
-
-
+const {
+    getAllFriends,
+    addFriend,
+    deleteFriend
+        } = require('../controllers/friendController');
 
 /**
  * @description Routes for CRUD functionality for friends
