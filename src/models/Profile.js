@@ -9,9 +9,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    Profile.associate = (models) => {
-        Profile.belongsToMany(models.User)
-    }
-
     return Profile;
 };
