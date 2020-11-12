@@ -13,8 +13,10 @@ exports.getAllFriends = async (req, res) => {
 };
 
 exports.addFriend = async (req, res) => {
-    let friendToAdd = req.params.id;
-    let currentId = jwt.verify(req.headers["authorization"], process.env.ACCES_TOKEN_SECRET).id;
+    let friendToAdd = req.body.id;
+    let currentId = jwt.verify(req.headers["authorization"].split(' ')[1], process.env.ACCES_TOKEN_SECRET).id;
+    console.log(currentId)
+    console.log(friendToAdd)
     if(friendToAdd <= 0 || friendToAdd === undefined) {
         return res.status(400).json({
             success: false,

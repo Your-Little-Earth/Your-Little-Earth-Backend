@@ -62,7 +62,7 @@ const {
  * @description Routes for CRUD functionality for friends
  * with parameter.
  */
-router.route('/:id')
+router.route('/')
     .get(getAllFriends)
     .post(addFriend)
     .delete(deleteFriend)

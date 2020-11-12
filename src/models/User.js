@@ -20,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 notEmpty: true
             }
-        }
+        },
     });
 
-    User.associate = (models) => {
-        User.belongsToMany(models.Profile)
+    User.associate = models => {
+        User.hasMany(models.Friend, {
+            onDelete: "cascade"
+        })
     }
 
     return User;
