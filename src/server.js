@@ -68,7 +68,7 @@ app.use(helmet());
 app.use(express.json());
 
 // All routes here
-app.use('/api/users', require('./routes/user'));
+app.use('/api/users', authenticateToken, require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
 //app.use('/api/service', require('./routes/service'));
 app.use('/adminpanel', require('./routes/adminpanel'));
