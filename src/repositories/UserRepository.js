@@ -5,9 +5,10 @@ const { User } = require('../models');
 * retrieve all the users in the database.
 * @author Ruben Fricke
 */
-function returnAllUser() {
+async function returnAllUser() {
     console.info("Retrieving all users");
-    User.findAll().then((users) => {
+    return await User.findAll({
+    }).then((users) => {
         return users;
     }).catch((err) => {
         console.log(err);
@@ -20,9 +21,9 @@ function returnAllUser() {
 * retrieve the user with the specified id in the database.
 * @author Ruben Fricke
 */
-function returnUserById(id) {
+async function returnUserById(id) {
     console.info(`Retrieving user with specified id: ${id}`);
-    User.find({
+    return await User.findOne({
         where: {
             id: id
         }
@@ -31,8 +32,7 @@ function returnUserById(id) {
     }).catch((err) => {
         console.log(err);
         return err;
-    })
-
+    });
 }
 
 /*
@@ -40,9 +40,9 @@ function returnUserById(id) {
 * retrieve the user with the specified email in the database.
 * @author Ruben Fricke
 */
-function returnUserByEmail(email) {
+async function returnUserByEmail(email) {
     console.info(`Retrieving user with specified email: ${email}`);
-    User.find({
+    return await User.findOne({
         where: {
             email: email
         }
@@ -51,7 +51,7 @@ function returnUserByEmail(email) {
     }).catch((err) => {
         console.log(err);
         return err;
-    })
+    });
 }
 
 /*
@@ -59,21 +59,20 @@ function returnUserByEmail(email) {
 * create the specified user into the database.
 * @author Ruben Fricke
 */
-function createUser(user) {
+async function createUser(user) {
     console.info("Creating user");
-    User.create({
+    return await User.create({
         username: user.username,
         email: user.email,
         password: user.password
     }).then((createdUser) => {
-        return createdUser;
+        return createUser;
     }).catch((err) => {
         if (err) {
             console.warn(err);
             return(err);
         }
     });
-    return true;
 }
 
 /*
@@ -81,9 +80,9 @@ function createUser(user) {
 * update the user with the specified id.
 * @author Ruben Fricke
 */
-function updateUser(id, user) {
+async function updateUser(id, user) {
     console.info(`Updating user with specified id: ${id}`);
-    User.update(user, {where: {
+    return await User.update(user, {where: {
         id: id
     }}).then((updatedUser) => {
         return updatedUser;
@@ -100,9 +99,9 @@ function updateUser(id, user) {
 * delete the user with the specified id.
 * @author Ruben Fricke
 */
-function deleteUser(id) {
+async function deleteUser(id) {
     console.info(`Deleting user with specified id: ${id}`);
-    User.destroy({
+    await User.destroy({
         where: {
             id: id
         }

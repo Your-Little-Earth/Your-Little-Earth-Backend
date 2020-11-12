@@ -6,11 +6,11 @@ const userService = require('../services/UserService')
 * @route GET api/users
 * @access Public
 */
-exports.getAllUsers = (req, res) => {
-  const users = userService.getAllUsers();
+exports.getAllUsers = async (req, res) => {
+  const users = await userService.getAllUsers();
   return res.status(200).json({
     success: true,
-    count: users.length,
+    length: users.length,
     data: users,
   });
 };
@@ -21,7 +21,7 @@ exports.getAllUsers = (req, res) => {
 * @route GET api/users/{id}
 * @access Public
 */
-exports.getUserById = (req, res) => {
+exports.getUserById = async (req, res) => {
     let userId = Number(req.params.id);
     if(userId <= 0) {
         return res.status(400).json({
@@ -30,7 +30,7 @@ exports.getUserById = (req, res) => {
         });
     }
 
-    let user = userService.getUserById(userId);
+    let user = await userService.getUserById(userId);
     if (!isEmpty(user)) {
         return res.status(200).json({
             success: true,
@@ -50,7 +50,7 @@ exports.getUserById = (req, res) => {
 * @route POST api/users
 * @access Public
 */
-exports.createUser = (req, res) => {
+exports.createUser = async (req, res) => {
     let userToCreate = req.body;
     if (userToCreate == null) {
         return res.status(400).json({
@@ -58,7 +58,7 @@ exports.createUser = (req, res) => {
             error: 'No user specified to create.'
         });
     }
-    let result = userService.createUser(userToCreate);
+    let result = await userService.createUser(userToCreate);
     return res.status(201).json({
         success: true,
         data: result
@@ -71,7 +71,7 @@ exports.createUser = (req, res) => {
 * @route PUT api/users/{id}
 * @access Public
 */
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
     let userId = Number(req.params.id);
     if(userId <= 0) {
         return res.status(400).json({
@@ -79,7 +79,7 @@ exports.updateUser = (req, res) => {
             error: 'The specified id is invalid.',
         });
     }
-    let updatedUser = userService.updateUser();
+    let updatedUser = await userService.updateUser();
     return res.status(200).json({
         success: true,
         data: updatedUser
@@ -92,7 +92,7 @@ exports.updateUser = (req, res) => {
 * @route DELETE api/users/{id}
 * @access Public
 */
-exports.deleteUser = (req, res) => {
+exports.deleteUser = async (req, res) => {
     if(req.params.id <= 0) {
         return res.status(400).json({
             success: false,
@@ -100,10 +100,10 @@ exports.deleteUser = (req, res) => {
         });
     }
 
-    let foundUser = userService.getUserById(req.params.id);
+    let foundUser = await userService.getUserById(req.params.id);
 
     if (isEmpty(foundUser)) {
-        userService.deleteUser();
+        await userService.deleteUser();
         return res.status(200).json({
             success: true,
             data: foundUser

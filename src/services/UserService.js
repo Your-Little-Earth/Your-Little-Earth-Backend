@@ -5,8 +5,9 @@ const userRepository = require('../repositories/UserRepository');
 * retrieve all the users in the database.
 * @author Ruben Fricke
 */
-function getAllUsers() {
-    return userRepository.returnAllUser();
+async function getAllUsers() {
+    let users = await userRepository.returnAllUser();
+    return users;
 }
 
 /*
@@ -14,8 +15,9 @@ function getAllUsers() {
 * create the specified user.
 * @author Ruben Fricke
 */
-function createUser(user) {
-    return userRepository.createUser(user);
+async function createUser(user) {
+    let createdUser = userRepository.createUser(user);
+    return createUser;
 }
 
 /*
@@ -23,8 +25,9 @@ function createUser(user) {
 * retrieve the user with the specified id in the database.
 * @author Ruben Fricke
 */
-function getUserById(id) {
-    return userRepository.returnUserById(id);
+async function getUserById(id) {
+    let foundUser = userRepository.returnUserById(id);
+    return foundUser;
 }
 
 /*
@@ -32,8 +35,8 @@ function getUserById(id) {
 * delete the user with the specified id.
 * @author Ruben Fricke
 */
-function deleteUser(id) {
-    return userRepository.deleteUser(id);
+async function deleteUser(id) {
+    return await userRepository.deleteUser(id);
 }
 
 /*
@@ -41,12 +44,12 @@ function deleteUser(id) {
 * update the user with the specified id.
 * @author Ruben Fricke
 */
-function updateUser(id, updatedUser) {
-    return userRepository.updateUser(id, updatedUser);
+async function updateUser(id, updatedUser) {
+    return await userRepository.updateUser(id, updatedUser);
 }
 
-function validateLoginCredentials(email, password) {
-    let user = userRepository.returnUserByEmail(email);
+async function validateLoginCredentials(email, password) {
+    let user = await userRepository.returnUserByEmail(email);
     if(!user) return res.status(404);
     if (user[0].password != password) return {status: false};
     return {
