@@ -9,10 +9,7 @@ async function returnAllUser() {
     console.info("Retrieving all users");
     return await User.findAll(
         {
-        include: [
-            {model: Earth, include: [Earth.Chunk] }
-        ],
-        raw: true
+        include: {all: true, nested: true}
     }
     ).then((users) => {
         return users;
