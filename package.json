@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/My-Little-Earth/My-Little-Earth-Backend#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "better-console": "^1.0.1",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
