@@ -1,4 +1,6 @@
 const userRepository = require('../repositories/UserRepository');
+const earthRepository = require('../repositories/EarthRepository');
+const { TestScheduler } = require('jest');
 
 /*
 * This method communicates with the repository and will
@@ -16,7 +18,8 @@ async function getAllUsers() {
 * @author Ruben Fricke
 */
 async function createUser(user) {
-    let createdUser = userRepository.createUser(user);
+    let createdUser = await userRepository.createUser(user);
+    await earthRepository.createEarth({name : createdUser.dataValues.username + '\'s Earth', score : 0}, createdUser.dataValues)
     return createUser;
 }
 

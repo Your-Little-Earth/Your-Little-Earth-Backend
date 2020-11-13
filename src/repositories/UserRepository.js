@@ -72,7 +72,7 @@ async function createUser(user) {
         email: user.email,
         password: user.password
     }).then((createdUser) => {
-        return createUser;
+        return createdUser;
     }).catch((err) => {
         if (err) {
             console.warn(err);
@@ -101,22 +101,6 @@ async function updateUser(id, user) {
     });
 }
 
-
-async function updateEarth(earthId, earth) {
-    console.info(`Updating earth with specified earth id: ${earthId}`);
-    return await Earth.update(earth.dataValues, {where: {
-        id: earthId
-    }}).then((updatedEarth) => {
-        console.log(updatedEarth)
-        return updatedEarth;
-    }).catch((err) => {
-        if (err) {
-            console.warn(err);
-            return(err);
-        }
-    });
-}
-
 /*
 * This method communicates with the database and will
 * delete the user with the specified id.
@@ -137,6 +121,5 @@ module.exports = {
     returnUserByEmail,
     createUser,
     updateUser,
-    deleteUser,
-    updateEarth
+    deleteUser
 }

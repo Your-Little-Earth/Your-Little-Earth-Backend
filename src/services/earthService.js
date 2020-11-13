@@ -1,5 +1,6 @@
 const Earth = require('../models/Earth');
 const userRepository = require('../repositories/UserRepository')
+const earthRepository = require('../repositories/EarthRepository')
 
 async function updateEarthScore(score) {
     users = await userRepository.returnAllUser();
@@ -26,10 +27,10 @@ async function updateEarthScoreNow(user, score) {
 }
 
 
-function update(user, score){
+async function update(user, score){
     console.log(user)
     user.dataValues.Earth.dataValues.score += score
-    userRepository.updateEarth(user.dataValues.Earth.dataValues.id, user.dataValues.Earth)
+    await earthRepository.updateEarth(user.dataValues.Earth.dataValues.id, user.dataValues.Earth)
 }
 
 
