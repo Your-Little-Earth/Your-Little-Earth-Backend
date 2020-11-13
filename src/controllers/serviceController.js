@@ -8,9 +8,7 @@ exports.carService = (req, res) => {
         });
     }
     let result = serviceService.addCarData(carData);
-    return res.status(201).json({
-        true
-    });
+    return res.status(201).json(true);
 };
 
 function isEmpty(obj) {
