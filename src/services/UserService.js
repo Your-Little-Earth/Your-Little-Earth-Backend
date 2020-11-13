@@ -1,6 +1,5 @@
 const userRepository = require('../repositories/UserRepository');
 const earthRepository = require('../repositories/EarthRepository');
-const { TestScheduler } = require('jest');
 
 /*
 * This method communicates with the repository and will
