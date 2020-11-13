@@ -1,10 +1,8 @@
 const eventService = require('../services/EventService');
-// var ValidateModel = require('validate-model');
-// var EventValidation = require('../Validators/eventValidator')
-// var validateAll = ValidateModel.validateAll;
 
 exports.eventOverview = async (req, res) => {
-    const events = eventService.returnAllEvents();
+    const events = await eventService.returnAllEvents();
+    console.log(events);
     return res.render('index',{
         events:events
     });
@@ -12,7 +10,7 @@ exports.eventOverview = async (req, res) => {
 
 exports.detailsOverview = async (req, res) => {
     let eventId = req.params.id;
-    let event = eventService.returnEventById(eventId)[0];
+    let event = await eventService.returnEventById(eventId);
     res.render('details', {
         name: event.name,
         description: event.description,
@@ -36,3 +34,11 @@ exports.eventCreate = async (req, res) => {
         res.redirect('/adminpanel');
     }
 };
+
+exports.getAllEvents = async (req, res) => {
+    const events = await eventService.returnAllEvents();
+    return res.status(200).json({
+        success: true,
+        data: events
+    });
+}

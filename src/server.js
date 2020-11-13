@@ -73,6 +73,7 @@ app.use('/api/login', require('./routes/login'));
 //app.use('/api/service', require('./routes/service'));
 app.use('/api/friends', authenticateToken, require('./routes/friends'));
 app.use('/adminpanel', require('./routes/adminpanel'));
+app.use('/api/events', require('./routes/event'));
 
 // Custom middleware here
 app.use(notFound);

@@ -23,5 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
+    User.associate = models => {
+        User.hasOne(models.Earth, {
+            foreignKey: 'userId',
+            onDelete: 'CASCADE'
+        });
+    };
+
     return User;
 };
