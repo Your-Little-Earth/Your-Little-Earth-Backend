@@ -3,7 +3,6 @@ const userService = require('../services/UserService')
 require('dotenv').config();
 
 exports.loginUser = async (req, res) => {
-    //Need to hash the req password
     let check = await userService.validateLoginCredentials(req.body.email, req.body.password)
     console.log(check.status);
     if(check.status) {

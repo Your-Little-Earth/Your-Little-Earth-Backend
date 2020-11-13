@@ -47,7 +47,6 @@ async function returnUserById(id) {
 async function returnUserByEmail(email) {
     console.info(`Retrieving user with specified email: ${email}`);
     return await User.findOne({
-        include: {all: true, nested: true},
         where: {
             email: email
         }

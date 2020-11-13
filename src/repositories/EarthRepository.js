@@ -22,7 +22,7 @@ async function createEarth(earth, user) {
         score: earth.score,
         userId: user.id
     }).then((createdEarth) => {
-        return createEarth;
+        return createdEarth;
     }).catch((err) => {
         if (err) {
             console.warn(err);
