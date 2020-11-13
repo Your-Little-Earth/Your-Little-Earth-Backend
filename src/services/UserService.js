@@ -1,5 +1,6 @@
 const userRepository = require('../repositories/UserRepository');
 const earthRepository = require('../repositories/EarthRepository');
+const bcrypt = require('bcrypt');
 
 /*
 * This method communicates with the repository and will
@@ -17,6 +18,9 @@ async function getAllUsers() {
 * @author Ruben Fricke
 */
 async function createUser(user) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    user.password = hashedPassword;
+
     let createdUser = await userRepository.createUser(user);
     await earthRepository.createEarth({name : createdUser.dataValues.username + '\'s Earth', score : 0}, createdUser.dataValues)
     return createUser;
@@ -53,9 +57,9 @@ async function updateUser(id, updatedUser) {
 async function validateLoginCredentials(email, password) {
     let user = await userRepository.returnUserByEmail(email);
     user = user.dataValues;
-    if(user == null) return {status: false};
 
-    if (user.password != password) return {status: false};
+    if(user == null) return {status: false};
+    if (!await bcrypt.compare(password, user.password)) return {status: false};
     return {
         status: true,
         data: user
