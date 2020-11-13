@@ -74,6 +74,7 @@ app.use('/api/activity', require('./routes/activity'));
 app.use('/api/friends', authenticateToken, require('./routes/friends'));
 app.use('/adminpanel', require('./routes/adminpanel'));
 app.use('/api/events', require('./routes/event'));
+app.use('/api/earths', require('./routes/earth'));
 
 // Custom middleware here
 app.use(notFound);
