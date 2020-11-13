@@ -51,7 +51,7 @@ exports.eventCreate = async (req, res) => {
         });
     } else {
         let eventToCreate = JSON.parse(JSON.stringify(value));
-        eventService.createEvent(eventToCreate);
+        await eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
     }
 };
