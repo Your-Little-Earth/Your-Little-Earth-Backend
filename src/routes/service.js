@@ -3,16 +3,10 @@ const router = express.Router();
 
 // Controller Methods
 const {
-    getAllServices,
-    getServiceById,
-    createService
+    carService
     } = require('../controllers/serviceController');
 
-    // router.route('/car')
-    //  .get(getAllServices)
-    //  .post(createService);
-
-    // router.route('/car/:id')
-    //  .get(getServiceById)
+    router.route('/car')
+     .post(carService);
 
 module.exports = router;

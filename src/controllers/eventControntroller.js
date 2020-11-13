@@ -1,4 +1,6 @@
 const eventService = require('../services/EventService');
+const earthService = require('../services/earthService');
+
 const Joi = require('joi');
 
 const schema = Joi.object({
@@ -18,6 +20,8 @@ const schema = Joi.object({
         .min(-50)
         .max(50)
 });
+
+
 
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();
@@ -51,6 +55,7 @@ exports.eventCreate = async (req, res) => {
         });
     } else {
         let eventToCreate = JSON.parse(JSON.stringify(value));
+        await earthService.updateEarthScore(eventToCreate.points);
         await eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
     }
@@ -59,7 +64,7 @@ exports.eventCreate = async (req, res) => {
 exports.getAllEvents = async (req, res) => {
     const events = await eventService.returnAllEvents();
     return res.status(200).json({
-        success: true,
+        // success: true,
         data: events
     });
 }

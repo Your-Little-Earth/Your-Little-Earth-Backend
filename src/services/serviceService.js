@@ -1,19 +1,9 @@
 const serviceRepository = require('../repositories/ServiceRepository');
 
-function getAllServices() {
-    return serviceRepository.returnAllServices();
-}
-
-function createService(service) {
-    return serviceRepository.createService(service);
-}
-
-function getServiceByUserId(id) {
-    return serviceRepository.returnServiceByUserId(id);
+function addCarData(carData){
+    return serviceRepository.addCarData(carData);
 }
 
 module.exports = {
-    createService,
-    getAllServices,
-    getServiceByUserId
+    addCarData
 }
