@@ -50,8 +50,7 @@ async function returnUserByEmail(email) {
         include: {all: true, nested: true},
         where: {
             email: email
-        },
-        raw: true
+        }
     }).then((user) => {
         return user;
     }).catch((err) => {
