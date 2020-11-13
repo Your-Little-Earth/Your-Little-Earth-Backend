@@ -25,24 +25,11 @@ const serviceArray = [
     },
 ];
 
-
-function returnAllServices() {
-    console.info("Retrieving all services");
-    return serviceArray;
-}
-
-function returnServiceByUserId(id) {
-    console.info(`Retrieving service with specified user id: ${id}`);
-    return serviceArray.filter(service => service.userid == id);
-}
-
-function createService(service) {
-    console.info("Creating service");
+function addCarData(service) {
+    console.info("Adding carData");
     serviceArray.push(service);
 }
 
 module.exports = {
-    returnServiceByUserId,
-    returnAllServices,
-    createService
+    addCarData
 }

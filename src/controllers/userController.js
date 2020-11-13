@@ -79,7 +79,7 @@ exports.updateUser = async (req, res) => {
             error: 'The specified id is invalid.',
         });
     }
-    let updatedUser = await userService.updateUser();
+    let updatedUser = await userService.updateUser(userId, req.body);
     return res.status(200).json({
         success: true,
         data: updatedUser

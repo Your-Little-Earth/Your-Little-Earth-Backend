@@ -9,7 +9,7 @@ async function returnAllUser() {
     console.info("Retrieving all users");
     return await User.findAll(
         {
-        include: {all: true, nested: true}
+        include: {all: true, nested: true},
     }
     ).then((users) => {
         return users;
@@ -89,7 +89,24 @@ async function updateUser(id, user) {
     return await User.update(user, {where: {
         id: id
     }}).then((updatedUser) => {
+        console.log(updated)
         return updatedUser;
+    }).catch((err) => {
+        if (err) {
+            console.warn(err);
+            return(err);
+        }
+    });
+}
+
+
+async function updateEarth(earthId, earth) {
+    console.info(`Updating earth with specified earth id: ${earthId}`);
+    return await Earth.update(earth.dataValues, {where: {
+        id: earthId
+    }}).then((updatedEarth) => {
+        console.log(updatedEarth)
+        return updatedEarth;
     }).catch((err) => {
         if (err) {
             console.warn(err);
@@ -118,5 +135,6 @@ module.exports = {
     returnUserByEmail,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    updateEarth
 }

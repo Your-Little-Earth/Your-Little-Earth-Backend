@@ -9,22 +9,8 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: true
             }
         },
-        temperature: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
-        },
-        sea_level: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-            validate: {
-                notEmpty: true
-            }
-        },
-        carbonDioxideAmount: {
-            type: DataTypes.FLOAT,
+        score: {
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 notEmpty: true

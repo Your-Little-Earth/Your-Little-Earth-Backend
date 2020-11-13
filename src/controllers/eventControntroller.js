@@ -1,4 +1,5 @@
 const eventService = require('../services/EventService');
+const earthService = require('../services/earthService')
 
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();
@@ -30,7 +31,8 @@ exports.eventCreate = async (req, res) => {
         });
     } else {
         let eventToCreate = JSON.parse(JSON.stringify(req.body));
-        eventService.createEvent(eventToCreate);
+        await earthService.updateEarthScore(eventToCreate.points);
+        await eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
     }
 };

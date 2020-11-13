@@ -10,7 +10,8 @@ exports.loginUser = async (req, res) => {
         const accesToken = 'Bearer '+ jwt.sign(check.data, process.env.ACCES_TOKEN_SECRET);
 
         return res.status(200).json({
-            token: accesToken
+            token: accesToken,
+            user: check.data
         });
     }
     return res.sendStatus(400);
