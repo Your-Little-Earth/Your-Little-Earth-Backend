@@ -22,6 +22,16 @@ async function updateEarthScore(score) {
     });
 }
 
+async function getEarthById(id) {
+    return earthRepository.returnEarthById(id);
+}
+
+async function getEarthByUserId(id) {
+    let user = await userRepository.returnUserById(id);
+    var earth = user.dataValues.Earth.dataValues;
+    return earth;
+}
+
 async function updateEarthScoreNow(user, score) {
     update(user, score)
 }
@@ -36,5 +46,7 @@ async function update(user, score){
 
 module.exports = {
     updateEarthScore,
-    updateEarthScoreNow
+    updateEarthScoreNow,
+    getEarthByUserId,
+    getEarthById
 }
