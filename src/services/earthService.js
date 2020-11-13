@@ -21,12 +21,13 @@ async function updateEarthScore(score) {
     });
 }
 
-async function updateEarthScoreNow(score,user) {
+async function updateEarthScoreNow(user, score) {
     update(user, score)
 }
 
 
 function update(user, score){
+    console.log(user)
     user.dataValues.Earth.dataValues.score += score
     userRepository.updateEarth(user.dataValues.Earth.dataValues.id, user.dataValues.Earth)
 }

@@ -12,9 +12,7 @@ exports.carService = async(req, res) => {
         });
     }
     user = await userService.getUserById(jwt.verify(req.headers['authorization'].split(' ')[1], process.env.ACCES_TOKEN_SECRET).id);
-    points = Math.floor(carData.totalTime / 15);
-    console.log(points)
-    console.log(user)
+    points = (Math.floor(carData.totalTime / 15)) * -1;
     let result = earthService.updateEarthScoreNow(user, points);
     return res.status(201).json(true);
 };
