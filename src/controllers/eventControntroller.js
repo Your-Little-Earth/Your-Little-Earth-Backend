@@ -1,4 +1,23 @@
 const eventService = require('../services/EventService');
+const Joi = require('joi');
+
+const schema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(100)
+        .required(),
+
+    description: Joi.string()
+        .min(10)
+        .max(1000)
+        .required(),
+
+    points: Joi.number()
+        .integer()
+        .min(-50)
+        .max(50)
+});
 
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();
