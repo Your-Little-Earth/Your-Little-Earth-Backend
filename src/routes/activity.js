@@ -4,7 +4,7 @@ const router = express.Router();
 // Controller Methods
 const {
     carService
-    } = require('../controllers/serviceController');
+    } = require('../controllers/activityController');
 
     router.route('/car')
      .post(carService);
