@@ -1,5 +1,27 @@
 const eventService = require('../services/EventService');
-const earthService = require('../services/earthService')
+const earthService = require('../services/earthService');
+
+const Joi = require('joi');
+
+const schema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(100)
+        .required(),
+
+    description: Joi.string()
+        .min(10)
+        .max(1000)
+        .required(),
+
+    points: Joi.number()
+        .integer()
+        .min(-50)
+        .max(50)
+});
+
+
 
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();
@@ -24,13 +46,15 @@ exports.eventCreateView = async (req, res) => {
 };
 
 exports.eventCreate = async (req, res) => {
-    if(false) {
-        console.warn(`Errors by submitting event: ${eventValidation.messages}`);
-        res.render('create-event', {
-            errors: eventValidation.messages
+    const {error, value} = schema.validate(req.body);
+    if(error) {
+        let errors = error.details.map(x => x.message).join(', ');
+        console.warn(`Errors by submitting event: ${errors}`);
+        res.render('add', {
+            errors: errors
         });
     } else {
-        let eventToCreate = JSON.parse(JSON.stringify(req.body));
+        let eventToCreate = JSON.parse(JSON.stringify(value));
         await earthService.updateEarthScore(eventToCreate.points);
         await eventService.createEvent(eventToCreate);
         res.redirect('/adminpanel');
@@ -39,8 +63,5 @@ exports.eventCreate = async (req, res) => {
 
 exports.getAllEvents = async (req, res) => {
     const events = await eventService.returnAllEvents();
-    return res.status(200).json({
-        // success: true,
-        data: events
-    });
+    return res.status(200).json({events});
 }

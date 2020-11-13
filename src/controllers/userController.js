@@ -8,10 +8,7 @@ const userService = require('../services/UserService')
 */
 exports.getAllUsers = async (req, res) => {
   const users = await userService.getAllUsers();
-  return res.status(200).json({
-    success: true,
-    length: users.length,
-    data: users,
+  return res.status(200).json({users,
   });
 };
 
@@ -32,9 +29,7 @@ exports.getUserById = async (req, res) => {
 
     let user = await userService.getUserById(userId);
     if (!isEmpty(user)) {
-        return res.status(200).json({
-            success: true,
-            data: user
+        return res.status(200).json({user
         });
     }
 
@@ -54,13 +49,11 @@ exports.createUser = async (req, res) => {
     let userToCreate = req.body;
     if (userToCreate == null) {
         return res.status(400).json({
-            // success: false,
             error: 'No user specified to create.'
         });
     }
     let result = await userService.createUser(userToCreate);
     return res.status(201).json({
-        // success: true,
         data: result
     });
 };
@@ -75,14 +68,12 @@ exports.updateUser = async (req, res) => {
     let userId = Number(req.params.id);
     if(userId <= 0) {
         return res.status(400).json({
-            // success: false,
             error: 'The specified id is invalid.',
         });
     }
     let updatedUser = await userService.updateUser(userId, req.body);
     return res.status(200).json({
-        // success: true,
-        data: updatedUser
+        updatedUser
     });
 };
 
@@ -95,7 +86,6 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     if(req.params.id <= 0) {
         return res.status(400).json({
-            // success: false,
             error: 'The specified id is invalid.',
         });
     }
@@ -104,14 +94,11 @@ exports.deleteUser = async (req, res) => {
 
     if (isEmpty(foundUser)) {
         await userService.deleteUser();
-        return res.status(200).json({
-            // success: true,
-            data: foundUser
+        return res.status(200).json({foundUser
         });
     }
 
   return res.status(404).json({
-    // success: false,
     error: 'No user found with the specified id.',
   })
 };

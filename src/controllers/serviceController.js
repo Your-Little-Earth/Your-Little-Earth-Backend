@@ -8,7 +8,6 @@ exports.carService = async(req, res) => {
     let carData = req.body;
     if (isEmpty(carData)) {
         return res.status(400).json({
-            // success: false,
             error: 'There was not enough car data send. Please send totalTime and totalKm'
         });
     }
@@ -17,10 +16,7 @@ exports.carService = async(req, res) => {
     console.log(points)
     console.log(user)
     let result = earthService.updateEarthScoreNow(user, points);
-    return res.status(201).json({
-        // success: true,
-        data: true
-    });
+    return res.status(201).json(true);
 };
 
 function isEmpty(obj) {

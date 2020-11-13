@@ -5,7 +5,8 @@ const router = express.Router();
 const {
     eventOverview,
     eventCreateView,
-    eventCreate
+    eventCreate,
+    detailsOverview
 } = require('../controllers/eventControntroller');
 
 router.route('/')
@@ -14,5 +15,8 @@ router.route('/')
 router.route('/events/create')
         .get(eventCreateView)
         .post(eventCreate);
+
+router.route('/events/details/:id')
+    .get(detailsOverview);
 
 module.exports = router;
