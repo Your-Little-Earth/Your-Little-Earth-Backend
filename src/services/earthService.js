@@ -21,6 +21,10 @@ async function updateEarthScore(score) {
     });
 }
 
+async function updateEarthScoreNow(score,user) {
+    update(user, score)
+}
+
 
 function update(user, score){
     user.dataValues.Earth.dataValues.score += score
@@ -29,5 +33,6 @@ function update(user, score){
 
 
 module.exports = {
-    updateEarthScore
+    updateEarthScore,
+    updateEarthScoreNow
 }
