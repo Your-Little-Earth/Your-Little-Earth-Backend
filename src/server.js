@@ -70,7 +70,7 @@ app.use(express.json());
 // All routes here
 app.use('/api/users', require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
-//app.use('/api/service', require('./routes/service'));
+app.use('/api/activity', require('./routes/service'));
 app.use('/api/friends', authenticateToken, require('./routes/friends'));
 app.use('/adminpanel', require('./routes/adminpanel'));
 app.use('/api/events', require('./routes/event'));
