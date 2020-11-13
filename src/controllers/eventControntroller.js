@@ -42,10 +42,12 @@ exports.eventCreateView = async (req, res) => {
 };
 
 exports.eventCreate = async (req, res) => {
-    if(false) {
-        console.warn(`Errors by submitting event: ${eventValidation.messages}`);
-        res.render('create-event', {
-            errors: eventValidation.messages
+    const {error, value} = schema.validate(req.body);
+    if(error) {
+        let errors = error.details.map(x => x.message).join(', ');
+        console.warn(`Errors by submitting event: ${errors}`);
+        res.render('add', {
+            errors: errors
         });
     } else {
         let eventToCreate = JSON.parse(JSON.stringify(req.body));
