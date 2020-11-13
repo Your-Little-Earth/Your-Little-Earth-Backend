@@ -63,8 +63,5 @@ exports.eventCreate = async (req, res) => {
 
 exports.getAllEvents = async (req, res) => {
     const events = await eventService.returnAllEvents();
-    return res.status(200).json({
-        // success: true,
-        data: events
-    });
+    return res.status(200).json({events});
 }
