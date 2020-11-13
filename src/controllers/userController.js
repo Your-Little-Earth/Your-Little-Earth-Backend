@@ -54,13 +54,13 @@ exports.createUser = async (req, res) => {
     let userToCreate = req.body;
     if (userToCreate == null) {
         return res.status(400).json({
-            success: false,
+            // success: false,
             error: 'No user specified to create.'
         });
     }
     let result = await userService.createUser(userToCreate);
     return res.status(201).json({
-        success: true,
+        // success: true,
         data: result
     });
 };
@@ -75,13 +75,13 @@ exports.updateUser = async (req, res) => {
     let userId = Number(req.params.id);
     if(userId <= 0) {
         return res.status(400).json({
-            success: false,
+            // success: false,
             error: 'The specified id is invalid.',
         });
     }
     let updatedUser = await userService.updateUser(userId, req.body);
     return res.status(200).json({
-        success: true,
+        // success: true,
         data: updatedUser
     });
 };
@@ -95,7 +95,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     if(req.params.id <= 0) {
         return res.status(400).json({
-            success: false,
+            // success: false,
             error: 'The specified id is invalid.',
         });
     }
@@ -105,13 +105,13 @@ exports.deleteUser = async (req, res) => {
     if (isEmpty(foundUser)) {
         await userService.deleteUser();
         return res.status(200).json({
-            success: true,
+            // success: true,
             data: foundUser
         });
     }
 
   return res.status(404).json({
-    success: false,
+    // success: false,
     error: 'No user found with the specified id.',
   })
 };

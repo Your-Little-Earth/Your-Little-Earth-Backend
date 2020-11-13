@@ -27,8 +27,7 @@ function update(user, score){
     userRepository.updateEarth(user.dataValues.Earth.dataValues.id, user.dataValues.Earth)
 }
 
-updateEarthScore(1)
 
 module.exports = {
-
+    updateEarthScore
 }

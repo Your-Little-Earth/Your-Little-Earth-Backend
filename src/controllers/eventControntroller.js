@@ -40,7 +40,7 @@ exports.eventCreate = async (req, res) => {
 exports.getAllEvents = async (req, res) => {
     const events = await eventService.returnAllEvents();
     return res.status(200).json({
-        success: true,
+        // success: true,
         data: events
     });
 }
