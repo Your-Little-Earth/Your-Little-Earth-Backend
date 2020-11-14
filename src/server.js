@@ -68,12 +68,12 @@ app.use(helmet());
 app.use(express.json());
 
 // All routes here
-app.use('/api/users', require('./routes/user'));
-app.use('/api/login', require('./routes/login'));
-app.use('/api/activity', require('./routes/activity'));
-app.use('/adminpanel', require('./routes/adminpanel'));
+app.use('/api/users', authenticateToken, require('./routes/user'));
+app.use('/api', require('./routes/login'));
+app.use('/api/activity', authenticateToken, require('./routes/activity'));
+app.use('/adminpanel',authenticateToken, require('./routes/adminpanel'));
 app.use('/api/events', require('./routes/event'));
-app.use('/api/earths', require('./routes/earth'));
+app.use('/api/earths', authenticateToken, require('./routes/earth'));
 
 // Custom middleware here
 app.use(notFound);

@@ -4,9 +4,9 @@ const router = express.Router();
 // Controller Methods
 const {
     carService
-    } = require('../controllers/activityController');
+} = require('../controllers/activityController');
 
-    router.route('/car')
-     .post(carService);
+router.route('/car')
+    .post(carService);
 
 module.exports = router;

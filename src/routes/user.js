@@ -8,32 +8,6 @@
  *              description: Successfully retrieved all the users.
  *          '401':
  *              description: Unable to access this endpoint without being authorized.
- *  post:
- *      description: This endpoint is used for creating a new user and storing this user in the database.
- *      parameters:
- *          -   in: body
- *              name: user
- *              description: The user to update
- *              schema:
- *                  type: object
- *                  required:
- *                  -   username
- *                      email
- *                      password
- *                  properties:
- *                      username:
- *                          type: string
- *                      email:
- *                          type: string
- *                      password:
- *                          type: string
- *      responses:
- *          '201':
- *              description: Successfully added the user to the database.
- *          '400':
- *              description: No user specified to create.
- *          '401':
- *              description: Unable to access this endpoint without being authorized.
  * /users/{id}:
  *  get:
  *      description: This endpoint is used for retrieving a single user by id.
@@ -108,7 +82,6 @@ const router = express.Router();
 const {
     getAllUsers,
     getUserById,
-    createUser,
     deleteUser,
     updateUser
         } = require('../controllers/userController');
@@ -118,8 +91,7 @@ const {
 * @author Ruben Fricke
 */
 router.route('/')
-  .get(getAllUsers)
-  .post(createUser);
+  .get(getAllUsers);
 
 /*
 * Routes for user endpoints with id route parameter to
