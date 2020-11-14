@@ -22,7 +22,7 @@
  *              description: Successfully logged in.
  *          '401':
  *              description: Unable to access this endpoint without being authorized.
- * /users:
+ * /signup:
  *  post:
  *      description: This endpoint is used for creating a new user and storing this user in the database.
  *      parameters:
@@ -60,7 +60,7 @@ const { createUser } = require('../controllers/userController');
 router.route('/login')
   .post(loginUser);
 
-router.route('/users')
+router.route('/signup')
     .post(createUser);
 
 module.exports = router;
