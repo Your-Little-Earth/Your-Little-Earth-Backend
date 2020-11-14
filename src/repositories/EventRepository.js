@@ -47,7 +47,7 @@ async function createEvent(event) {
         description: event.description,
         points: event.points
     }).then((createdEvent) => {
-        return createEvent;
+        return createdEvent;
     }).catch((err) => {
         if (err) {
             console.warn(err);

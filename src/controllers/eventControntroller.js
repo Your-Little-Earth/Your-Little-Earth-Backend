@@ -1,8 +1,10 @@
 const eventService = require('../services/EventService');
 const earthService = require('../services/earthService');
-
 const Joi = require('joi');
 
+/**
+ * Schema for the event. This schema can be used for validating the data in this schema.
+ */
 const schema = Joi.object({
     name: Joi.string()
         .alphanum()
@@ -21,8 +23,9 @@ const schema = Joi.object({
         .max(50)
 });
 
-
-
+/**
+ * Controller logic for retrieving all the available events.
+ */
 exports.eventOverview = async (req, res) => {
     const events = await eventService.returnAllEvents();
     console.log(events);
@@ -31,6 +34,9 @@ exports.eventOverview = async (req, res) => {
     });
 };
 
+/**
+ * Controller logic for retrieving the details of a single event specified by id.
+ */
 exports.detailsOverview = async (req, res) => {
     let eventId = req.params.id;
     let event = await eventService.returnEventById(eventId);
@@ -41,10 +47,16 @@ exports.detailsOverview = async (req, res) => {
     });
 };
 
+/**
+ * The controller for showing the view for adding an event.
+ */
 exports.eventCreateView = async (req, res) => {
     res.render('add');
 };
 
+/**
+ * The controller logic for creating the event.
+ */
 exports.eventCreate = async (req, res) => {
     const {error, value} = schema.validate(req.body);
     if(error) {
@@ -61,6 +73,9 @@ exports.eventCreate = async (req, res) => {
     }
 };
 
+/**
+ * The controller logic for retrieving all the events in json.
+ */
 exports.getAllEvents = async (req, res) => {
     const events = await eventService.returnAllEvents();
     return res.status(200).json({events});

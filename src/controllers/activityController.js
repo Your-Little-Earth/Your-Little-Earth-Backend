@@ -3,6 +3,9 @@ const userService = require('../services/UserService')
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+/**
+ * The controller logic for the car service
+ */
 exports.carService = async(req, res) => {
     let carData = req.body;
     if (isEmpty(carData)) {
@@ -16,6 +19,10 @@ exports.carService = async(req, res) => {
     return res.status(201).json(true);
 };
 
+/**
+ * This method checks wether an object is empty.
+ * @param {The object that will be checked} obj
+ */
 function isEmpty(obj) {
     return !Object.keys(obj).length;
 }

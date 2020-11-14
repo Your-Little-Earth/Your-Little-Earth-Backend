@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const userService = require('../services/UserService')
 require('dotenv').config();
 
+/**
+ * The controller logic for logging in and creating an access token.
+ */
 exports.loginUser = async (req, res) => {
     let check = await userService.validateLoginCredentials(req.body.email, req.body.password)
     console.log(check.status);

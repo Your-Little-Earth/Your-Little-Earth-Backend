@@ -1,6 +1,9 @@
 const earthService = require('../services/earthService');
 const userService = require('../services/UserService');
 
+/**
+ * The controller logic for retrieving an earth by id.
+ */
 exports.getEarthById = async(req, res) => {
     let earthId = Number(req.params.id);
     if(earthId <= 0) {
@@ -21,6 +24,9 @@ exports.getEarthById = async(req, res) => {
   })
 }
 
+/**
+ * The controller logic for retrieving an earth by user id.
+ */
 exports.getEarthByUserId = async(req, res) => {
     let userId = Number(req.params.id);
     if(userId <= 0) {

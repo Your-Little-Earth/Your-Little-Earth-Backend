@@ -71,7 +71,6 @@ app.use(express.json());
 app.use('/api/users', require('./routes/user'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/activity', require('./routes/activity'));
-app.use('/api/friends', authenticateToken, require('./routes/friends'));
 app.use('/adminpanel', require('./routes/adminpanel'));
 app.use('/api/events', require('./routes/event'));
 app.use('/api/earths', require('./routes/earth'));
